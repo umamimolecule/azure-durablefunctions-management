@@ -9,7 +9,8 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Extensions
     {
         public static T GetQueryParameter<T>(this IQueryCollection query, string key, bool required, Func<string, T> converter, T defaultValue = default(T))
         {
-            if (!query.TryGetValue(key, out var value) || value.Count == 0 || (value.Count == 1 && string.IsNullOrWhiteSpace(value[0])))
+            var value = query.FirstOrDefault(x => string.Compare(x.Key, key, true) == 0);
+            if (value.Value.Count == 0 || (value.Value.Count == 1 && string.IsNullOrWhiteSpace(value.Value[0])))
             {
                 if (required)
                 {
@@ -19,7 +20,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Extensions
                 return defaultValue;
             }
 
-            return converter(value.First());
+            return converter(value.Value.First());
         }
     }
 }

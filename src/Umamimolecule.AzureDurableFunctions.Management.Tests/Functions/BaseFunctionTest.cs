@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Umamimolecule.AzureDurableFunctions.Management.Tests
+namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
 {
     public abstract class BaseFunctionTest<T> where T : new()
     {
@@ -9,6 +9,6 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests
             return new FunctionTestFixture<T>();
         }
 
-        protected abstract HttpRequest CreateValidRequest();
+        protected abstract HttpRequest CreateValidRequest(IQueryCollection query = null);
     }
 }

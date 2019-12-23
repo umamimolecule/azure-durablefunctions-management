@@ -9,7 +9,7 @@ using Umamimolecule.AzureDurableFunctions.Management.Functions;
 using Umamimolecule.AzureDurableFunctions.Management.Tests.Extensions;
 using Xunit;
 
-namespace Umamimolecule.AzureDurableFunctions.Management.Tests
+namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
 {
     public class GetManagementWebhookUrlsTests : BaseFunctionTest<GetManagementWebhookUrls>
     {
@@ -95,7 +95,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests
             payload.Error.Message.ShouldBe("Oops");
         }
 
-        protected override HttpRequest CreateValidRequest()
+        protected override HttpRequest CreateValidRequest(IQueryCollection query = null)
         {
             Mock<HttpRequest> request = new Mock<HttpRequest>();
             return request.Object;

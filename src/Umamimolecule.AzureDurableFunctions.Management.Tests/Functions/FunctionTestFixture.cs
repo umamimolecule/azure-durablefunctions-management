@@ -2,7 +2,7 @@
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Moq;
 
-namespace Umamimolecule.AzureDurableFunctions.Management.Tests
+namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
 {
     public class FunctionTestFixture<T> : IDisposable where T : new()
     {

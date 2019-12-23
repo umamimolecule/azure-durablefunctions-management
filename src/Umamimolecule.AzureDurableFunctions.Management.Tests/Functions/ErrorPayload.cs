@@ -1,4 +1,4 @@
-﻿namespace Umamimolecule.AzureDurableFunctions.Management.Tests
+﻿namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
 {
     public class ErrorPayload
     {
