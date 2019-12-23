@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Umamimolecule.AzureDurableFunctionsStatus.Exceptions;
-using Umamimolecule.AzureDurableFunctionsStatus.Extensions;
-using Umamimolecule.AzureDurableFunctionsStatus.Utility;
+using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
+using Umamimolecule.AzureDurableFunctions.Management.Extensions;
+using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Functions
+namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
     public class GetStatusForAllInstances
     {

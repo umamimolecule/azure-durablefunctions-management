@@ -2,7 +2,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Exceptions
+namespace Umamimolecule.AzureDurableFunctions.Management.Exceptions
 {
     public class StatusCodeException : Exception
     {

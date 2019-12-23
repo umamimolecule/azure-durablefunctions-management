@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Exceptions
+namespace Umamimolecule.AzureDurableFunctions.Management.Exceptions
 {
     public class BadRequestException : StatusCodeException
     {

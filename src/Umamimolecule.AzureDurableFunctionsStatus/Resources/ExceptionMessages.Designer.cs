@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Resources {
+namespace Umamimolecule.AzureDurableFunctions.Management.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Umamimolecule.AzureDurableFunctionsStatus.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Umamimolecule.AzureDurableFunctionsStatus.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

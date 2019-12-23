@@ -7,10 +7,10 @@ using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Umamimolecule.AzureDurableFunctionsStatus.Exceptions;
-using Umamimolecule.AzureDurableFunctionsStatus.Extensions;
+using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
+using Umamimolecule.AzureDurableFunctions.Management.Extensions;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Functions
+namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
     public class StartInstance
     {

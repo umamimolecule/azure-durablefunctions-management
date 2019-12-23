@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
-using Umamimolecule.AzureDurableFunctionsStatus.Exceptions;
-using Umamimolecule.AzureDurableFunctionsStatus.Extensions;
+using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
+using Umamimolecule.AzureDurableFunctions.Management.Extensions;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Functions
+namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
     public class RewindInstance
     {

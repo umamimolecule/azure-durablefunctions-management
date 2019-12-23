@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
-using Umamimolecule.AzureDurableFunctionsStatus.Exceptions;
+using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Extensions
+namespace Umamimolecule.AzureDurableFunctions.Management.Extensions
 {
     public static class QueryCollectionExtensions
     {

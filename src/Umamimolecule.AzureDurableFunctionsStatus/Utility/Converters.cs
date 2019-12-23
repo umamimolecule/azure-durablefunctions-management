@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Umamimolecule.AzureDurableFunctionsStatus.Exceptions;
+using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
 
-namespace Umamimolecule.AzureDurableFunctionsStatus.Utility
+namespace Umamimolecule.AzureDurableFunctions.Management.Utility
 {
     public static class Converters
     {
