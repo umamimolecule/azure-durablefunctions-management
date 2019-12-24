@@ -22,26 +22,21 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
             try
             {
                 var orchestratorFunctionName = req.Query.GetQueryParameter("OrchestratorFunctionName", true, x => x);
+                var specifiedInstanceId = req.Query.GetQueryParameter("InstanceId", false, x => x, string.Empty);
+                if (string.IsNullOrWhiteSpace(specifiedInstanceId))
+                {
+                    specifiedInstanceId = string.Empty;
+                }
+
                 var body = await req.ReadAsStringAsync();
-                if (string.IsNullOrWhiteSpace(body))
+                var input = string.IsNullOrWhiteSpace(body) ? null : JsonConvert.DeserializeObject<JObject>(body);
+                var instanceId = await client.StartNewAsync(orchestratorFunctionName, specifiedInstanceId, input);
+                dynamic result = new
                 {
-                    var instanceId = await client.StartNewAsync(orchestratorFunctionName);
-                    dynamic result = new
-                    {
-                        instanceId
-                    };
-                    return new OkObjectResult(result);
-                }
-                else
-                {
-                    var input = JsonConvert.DeserializeObject<JObject>(body);
-                    var instanceId = await client.StartNewAsync(orchestratorFunctionName, input);
-                    dynamic result = new
-                    {
-                        instanceId
-                    };
-                    return new OkObjectResult(result);
-                }
+                    instanceId
+                };
+
+                return new OkObjectResult(result);
             }
             catch (ArgumentException ae)
             {
