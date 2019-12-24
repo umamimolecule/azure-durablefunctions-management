@@ -16,7 +16,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("RaiseEvent")]
         public virtual async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "instances/{instanceId}/raiseEvent")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "orchestration/instances/{instanceId}/raiseEvent")]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client,
             string instanceId)
         {

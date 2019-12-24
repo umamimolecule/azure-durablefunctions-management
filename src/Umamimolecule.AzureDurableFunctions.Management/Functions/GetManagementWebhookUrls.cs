@@ -13,7 +13,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("GetManagementWebhookUrls")]
         public IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "instances/{instanceId}/managementWebhookUrls")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "orchestration/instances/{instanceId}/managementWebhookUrls")]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client,
             string instanceId)
         {

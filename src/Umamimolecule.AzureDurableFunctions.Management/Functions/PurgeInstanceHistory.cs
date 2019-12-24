@@ -14,7 +14,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("PurgeInstanceHistory")]
         public virtual async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "instances/{instanceId}/purgeInstanceHistory")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "orchestration/instances/{instanceId}/purgeInstanceHistory")]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client,
             string instanceId)
         {
