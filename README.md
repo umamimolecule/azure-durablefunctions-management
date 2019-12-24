@@ -169,7 +169,7 @@ namespace DurableFunctionsTest1
 
 Run the project by pressing F5, then execute the following GET request in Postman:
 ```
-http://localhost:7071/api/orchestration/instances
+http://localhost:7071/api/Function1
 ```
 
 The durable function should trigger and produce output similar to the following:
