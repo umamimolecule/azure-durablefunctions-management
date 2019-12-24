@@ -1,3 +1,5 @@
+[![Build Status](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_apis/build/status/azure-durablefunctions-management%20CI?branchName=master)](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_build/latest?definitionId=15&branchName=master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15)
+
 # azure-durablefunctions-management
 Automatically adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
 
@@ -8,8 +10,9 @@ https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
 ## Installation
 
 Select your Durable Functions project and run the following command in the Package Manager console:
-
-`install-package Umamimolecule.AzureDurableFunctions.Management`
+```
+install-package Umamimolecule.AzureDurableFunctions.Management
+```
 
 ## Motivation
 
@@ -31,9 +34,9 @@ Let's create a durable function project and add the management package so we can
 
 What you'll need:
  - Visual Studio (For this tutorial I'm using VS 2019)
- - Postman or a similar tool to issue GET and POST requests. ![Here is a Postman collection](tools/DurableFunctions Instance Management.postman_collection) you may find useful.
+ - Postman or a similar tool to issue GET and POST requests. [Here is a Postman collection](tools/DurableFunctions%20Instance%20Management.postman_collection.json) you may find useful as it contains all of the endpoints with the query parameters set up.
 
-### 1. Create new Azure Functions project
+### 1. Create a new Azure Functions project
 
 ![Screenshot](docs/visualstudionewproject.png)
 
@@ -46,7 +49,6 @@ Note: At the time of writing, I'm using version `1.0.29` of the `Microsoft.NET.S
 ### 2. Add Microsoft.Azure.WebJobs.Extensions.DurableTask package
 
 Open the Package Manager Console window and type the following command:
-
 ```
 install-package Microsoft.Azure.WebJobs.Extensions.DurableTask
 ```
@@ -58,7 +60,6 @@ At the time of writing, I'm using version `2.1.0` of the `Microsoft.Azure.WebJob
 ### 3. Add Umamimolecule.AzureDurableFunctions.Management package
 
 Open the Package Manager Console window and type the following command:
-
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
@@ -71,7 +72,7 @@ At this point, press F5 to build and run the Azure function locally.  You should
 
 ### 4. Create a HTTP-triggered durable function
 
-We'll create a HTTP-triggered durable function that doesn't do much apart from wait for a period of time and then completes.  It doesn't sound terribly useful, but we'll use it to demonstrate some of the management endpoints.
+We'll create a HTTP-triggered durable function that doesn't do much apart from wait for a period of time and then completes successfully.  It doesn't sound terribly useful, but we'll use it to demonstrate some of the management endpoints.
 
 a. Replace the contents of the `Function1.cs` file with the following code:
 ```
@@ -98,7 +99,7 @@ namespace DurableFunctionsTest1
 }
 ```
 
-b. Right-click the project and click **Add** -> **Class** and then set filename as `MyOrchestrator.cs`.  Click OK.  Replace the contents of the file with the following code:
+b. Right-click the project and click **Add** -> **Class** and then set filename as `MyOrchestrator.cs`.  Click **OK**.  Replace the contents of the file with the following code:
 ```
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
@@ -122,7 +123,7 @@ namespace DurableFunctionsTest1
 }
 ```
 
-c. Right-click the project and click **Add** -> **Class** and then set filename as `PauseActivity.cs`.  Click OK.  Replace the contents of the file with the following code:
+c. Right-click the project and click **Add** -> **Class** and then set filename as `PauseActivity.cs`.  Click **OK**.  Replace the contents of the file with the following code:
 ```
 using System.Threading;
 using Microsoft.Azure.WebJobs;
@@ -153,7 +154,6 @@ namespace DurableFunctionsTest1
 ### 5. Trigger the durable function
 
 Run the project by pressing F5, then execute the following GET request in Postman:
-
 ```
 http://localhost:7071/api/orchestration/instances
 ```
@@ -172,7 +172,7 @@ After 10 seconds the activity will complete.
 
 ### 6. Use the management endpoints
 
-Now we can start using the management endpoints in our Azure function to query the sstatus of the instance.
+Now we can start using the management endpoints in our Azure function to query the status of the instance.
 
 a. Issue the following GET request in Postman:
 ```
@@ -201,9 +201,7 @@ Lets now purge the history for this instance by issuing the following POST reque
 ```
 http://localhost:7071/api/orchestration/instances/03517277886f4e2988d0b63627b994dc/purgeInstanceHistory
 ```
-Make sure to replace the ID above with the actual value for your instance.
-
-Now run this GET query again
+Make sure to replace the ID above with the actual value for your instance.  Now run this GET query again:
 ```
 http://localhost:7071/api/orchestration/instances
 ```
