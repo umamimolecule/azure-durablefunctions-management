@@ -22,7 +22,7 @@ When you add this package to your Azure Functions project, you'll automatically 
 
 ![Functions Console](docs/functionsconsole.png)
 
-The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overriden the default route prefix).
+The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
 ## Documentation
 
