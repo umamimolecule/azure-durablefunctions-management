@@ -3,9 +3,21 @@
 # azure-durablefunctions-management
 Automatically adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
 
+### Table of contents
+ - [NuGet Package](#nugetpackage)  
+ - [Installation](#installation)  
+ - [Motivation](#motivation)  
+ - [Documentation](#documentation)  
+ - [Tutorial](#tutorial)  
+
+---
+<a name="nugetpackage"/>
+
 ## NuGet Package
 
 https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
+
+<a name="installation"/>
 
 ## Installation
 
@@ -13,6 +25,8 @@ Select your Durable Functions project and run the following command in the Packa
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
+
+<a name="motivation"/>
 
 ## Motivation
 
