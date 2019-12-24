@@ -1,3 +1,5 @@
+[![Build Status](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_apis/build/status/azure-durablefunctions-management%20CI?branchName=master)](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_build/latest?definitionId=15&branchName=master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15)
+
 # azure-durablefunctions-management
 Automatically adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
 
