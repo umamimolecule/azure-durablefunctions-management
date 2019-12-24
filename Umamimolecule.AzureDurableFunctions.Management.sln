@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umamimolecule.AzureDurableFunctions.Management", "Umamimolecule.AzureDurableFunctions.Management\Umamimolecule.AzureDurableFunctions.Management.csproj", "{C46C0C23-8837-4158-A36C-0A481F7A8AFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umamimolecule.AzureDurableFunctions.Management", "src\Umamimolecule.AzureDurableFunctions.Management\Umamimolecule.AzureDurableFunctions.Management.csproj", "{C46C0C23-8837-4158-A36C-0A481F7A8AFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umamimolecule.AzureDurableFunctions.Management.Tests", "Umamimolecule.AzureDurableFunctions.Management.Tests\Umamimolecule.AzureDurableFunctions.Management.Tests.csproj", "{3FEE1FC9-2555-41CA-B77A-155DABC15F38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umamimolecule.AzureDurableFunctions.Management.Tests", "test\Umamimolecule.AzureDurableFunctions.Management.Tests\Umamimolecule.AzureDurableFunctions.Management.Tests.csproj", "{3FEE1FC9-2555-41CA-B77A-155DABC15F38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

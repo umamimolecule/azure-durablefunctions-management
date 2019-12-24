@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "4b20df3d-d880-4ec0-a470-91868b5205bd",
+		"name": "DurableFunctions Instance Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get status for all instances",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances?runtimeStatus=Running,Terminated&createdTimeFrom=2019-12-13T09:30:00.000Z&createdTimeTo=2020-12-13T09:30:00.000Z&instanceIdPrefix=abc&pageSize=500&showInput=true&taskHubNames&continuationToken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances"
+					],
+					"query": [
+						{
+							"key": "runtimeStatus",
+							"value": "Running,Terminated",
+							"description": "Return orchestration instances which matches the runtimeStatus.  A comma-delimited list of values."
+						},
+						{
+							"key": "createdTimeFrom",
+							"value": "2019-12-13T09:30:00.000Z",
+							"description": "Return orchestration instances which were created after this DateTime."
+						},
+						{
+							"key": "createdTimeTo",
+							"value": "2020-12-13T09:30:00.000Z",
+							"description": "Return orchestration instances which were created before this DateTime."
+						},
+						{
+							"key": "instanceIdPrefix",
+							"value": "abc",
+							"description": "Return orchestration instances that have this instance id prefix."
+						},
+						{
+							"key": "pageSize",
+							"value": "500",
+							"description": "Number of records per one request. The default value is 100."
+						},
+						{
+							"key": "showInput",
+							"value": "true",
+							"description": "Determines whether the query will include the input of the orchestration."
+						},
+						{
+							"key": "taskHubNames",
+							"value": null,
+							"description": "Return orchestration instances which matches the TaskHubNames."
+						},
+						{
+							"key": "continuationToken",
+							"value": null,
+							"description": "ContinuationToken of the pager."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get status for specific instance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId?showHistory=true&showHistoryOutput=false&showInput=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId"
+					],
+					"query": [
+						{
+							"key": "showHistory",
+							"value": "true",
+							"description": "Boolean marker for including execution history in the response."
+						},
+						{
+							"key": "showHistoryOutput",
+							"value": "false",
+							"description": "Boolean marker for including input and output in the execution history response."
+						},
+						{
+							"key": "showInput",
+							"value": "true",
+							"description": "If set, fetch and return the input for the orchestration instance."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rewind instance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId/rewind?Reason=It failed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId",
+						"rewind"
+					],
+					"query": [
+						{
+							"key": "Reason",
+							"value": "It failed",
+							"description": "The reason for rewinding the orchestration instance."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start instance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"name\": \"Fred\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/startNew?OrchestratorFunctionName=YourFunctionName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"startNew"
+					],
+					"query": [
+						{
+							"key": "OrchestratorFunctionName",
+							"value": "YourFunctionName",
+							"description": "The name of the orchestrator function to start."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Purge instance history",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId/purgeInstanceHistory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId",
+						"purgeInstanceHistory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Purge instance history for condition",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/purgeInstanceHistory?CreatedTimeFrom=2019-12-13T09:30:00.000Z&CreatedTimeTo&RuntimeStatus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"purgeInstanceHistory"
+					],
+					"query": [
+						{
+							"key": "CreatedTimeFrom",
+							"value": "2019-12-13T09:30:00.000Z",
+							"description": "Start creation time for querying instances for purging."
+						},
+						{
+							"key": "CreatedTimeTo",
+							"value": null,
+							"description": "End creation time for querying instances for purging."
+						},
+						{
+							"key": "RuntimeStatus",
+							"value": null,
+							"description": "List of runtime status for querying instances for purging. Only Completed, Terminated, or Failed will be processed."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get management webhook URLs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId/managementWebhookUrls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId",
+						"managementWebhookUrls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terminate specific instance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId/terminate?Reason=The function was stuck in loop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId",
+						"terminate"
+					],
+					"query": [
+						{
+							"key": "Reason",
+							"value": "The function was stuck in loop",
+							"description": "The reason for terminating the orchestration instance."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Raise event to instance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/javascript",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"name\": \"Fred\"\n}",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/orchestration/instances/theInstanceId/raiseEvent?eventName=theEventName&taskHubName=&connectionName=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"orchestration",
+						"instances",
+						"theInstanceId",
+						"raiseEvent"
+					],
+					"query": [
+						{
+							"key": "eventName",
+							"value": "theEventName",
+							"description": "The name of the event."
+						},
+						{
+							"key": "taskHubName",
+							"value": "",
+							"description": "The TaskHubName of the orchestration that will handle the event."
+						},
+						{
+							"key": "connectionName",
+							"value": "",
+							"description": "The name of the connection string associated with taskHubName."
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
