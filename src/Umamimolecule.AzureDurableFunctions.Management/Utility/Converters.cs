@@ -19,7 +19,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
                     {
                         try
                         {
-                            result.Add(Enum.Parse<TEnum>(item, true));
+                            result.Add((TEnum)Enum.Parse(typeof(TEnum), item, true));
                         }
                         catch (ArgumentException ae)
                         {
