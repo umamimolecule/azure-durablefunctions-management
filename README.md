@@ -1,5 +1,5 @@
 # azure-durablefunctions-management
-Adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
+Automatically adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
 
 ## NuGet Package
 
