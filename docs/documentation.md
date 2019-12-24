@@ -17,7 +17,7 @@ Refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/az
 
 ## Start new instance
 
-Starts a new instance. Internally, this method enqueues a message into the control queue, which then triggers the start of a function with the specified name that uses the orchestration trigger binding..
+Starts a new instance. Internally, this method enqueues a message into the control queue, which then triggers the start of a function with the specified name that uses the orchestration trigger binding.
 
 `[POST] http://localhost:7071/api/orchestration/instances/startNew`
 
