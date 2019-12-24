@@ -45,7 +45,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                     return new NotFoundObjectResult(value);
                 }
 
-                throw;
+                return ae.ToUnhandledErrorResult();
             }
             catch (StatusCodeException e)
             {
