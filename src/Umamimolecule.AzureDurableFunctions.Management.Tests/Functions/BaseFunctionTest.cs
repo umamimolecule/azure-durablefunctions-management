@@ -8,7 +8,5 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         {
             return new FunctionTestFixture<T>();
         }
-
-        protected abstract HttpRequest CreateValidRequest(IQueryCollection query = null);
     }
 }

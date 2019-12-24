@@ -297,7 +297,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
             payload.Error.Message.ShouldBe("Oops");
         }
 
-        protected override HttpRequest CreateValidRequest(IQueryCollection query = null)
+        private HttpRequest CreateValidRequest(IQueryCollection query = null)
         {
             Mock<HttpRequest> request = new Mock<HttpRequest>();
             request.SetupGet(x => x.Query)

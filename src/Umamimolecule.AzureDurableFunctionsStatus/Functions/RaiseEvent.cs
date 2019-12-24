@@ -40,14 +40,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 
                 if (string.IsNullOrWhiteSpace(taskHubName))
                 {
-                    if (eventData == null)
-                    {
-                        await client.RaiseEventAsync(instanceId, eventName);
-                    }
-                    else
-                    {
-                        await client.RaiseEventAsync(instanceId, eventName, eventData);
-                    }
+                    await client.RaiseEventAsync(instanceId, eventName, eventData);
                 }
                 else
                 {
@@ -72,7 +65,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                     return new NotFoundObjectResult(value);
                 }
 
-                throw;
+                return ae.ToUnhandledErrorResult();
             }
             catch (StatusCodeException e)
             {

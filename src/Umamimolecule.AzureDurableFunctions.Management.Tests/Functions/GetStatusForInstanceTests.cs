@@ -120,40 +120,8 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
             payload.Error.Message.ShouldBe("Oops");
         }
 
-        //[Fact]
-        //public async Task UnexpectedException_WithQueryParameters()
-        //{
-        //    using var fixture = this.CreateTestFixture();
-        //    var client = fixture.Client;
 
-        //    QueryCollection query = new QueryCollection(
-        //        new Dictionary<string, StringValues>()
-        //        {
-        //            { "runtimestatus", "Running" },
-        //            { "CreatedTimeFrom", "2019-12-13T09:30:15.123Z" },
-        //            { "createdTimeTo", "2020-12-13T09:30:15.123Z" },
-        //            { "InstanceIdPrefix", "blah" },
-        //            { "PageSize", "500" },
-        //            { "ShowInput", "true" },
-        //            { "TaskHubNames", "hub1,hub2" },
-        //            { "ContinuationToken", "abc" },
-        //        }
-        //    );
-
-        //    client.Setup(x => x.GetStatusAsync(It.IsAny<OrchestrationStatusQueryCondition>(), It.IsAny<CancellationToken>()))
-        //          .ThrowsAsync(new ApplicationException("Oops"));
-
-        //    var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-        //                                            client.Object);
-        //    result.ShouldNotBeNull();
-        //    var objectResult = result.ShouldBeOfType<ObjectResult>();
-        //    objectResult.StatusCode.ShouldBe(500);
-        //    var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-        //    payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
-        //    payload.Error.Message.ShouldBe("Oops");
-        //}
-
-        protected override HttpRequest CreateValidRequest(IQueryCollection query = null)
+        private HttpRequest CreateValidRequest(IQueryCollection query = null)
         {
             Mock<HttpRequest> request = new Mock<HttpRequest>();
             request.SetupGet(x => x.Query)
