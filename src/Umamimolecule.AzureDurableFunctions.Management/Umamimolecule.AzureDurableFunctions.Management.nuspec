@@ -6,7 +6,7 @@
     <title>Umamimolecule.AzureDurableFunctions.Management</title>
     <authors>Umamimolecule</authors>
     <owners>Umamimolecule</owners>
-    <projectUrl>https://github.com/umamimolecule/azure-durablefunctions-status</projectUrl>
+    <projectUrl>https://github.com/umamimolecule/azure-durablefunctions-management</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package to add management HTTP endpoints for an Azure Durable Functions assembly.</description>
     <copyright>Umamimolecule 2019</copyright>

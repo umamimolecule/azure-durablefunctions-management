@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Umamimolecule.AzureDurableFunctionsStatus\Umamimolecule.AzureDurableFunctions.Management.csproj" />
+    <ProjectReference Include="..\Umamimolecule.AzureDurableFunctions.Management\Umamimolecule.AzureDurableFunctions.Management.csproj" />
   </ItemGroup>
 
 </Project>
