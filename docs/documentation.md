@@ -164,7 +164,6 @@ Terminates a running instance.
 
 **Query parameters**
  - Reason (**Required**): A description of why the instance was terminated.
-<a name="sendeventstoinstances" />
 
 **Example**
 ```
@@ -176,6 +175,8 @@ POST http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e
 From [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-instance-management#terminate-instances) regarding when an instance is terminated:
 
 >*A terminated instance stops running as soon as it reaches the next await (.NET) or yield (JavaScript) point, or it terminates immediately if it's already on an await or yield.*
+
+<a name="sendeventstoinstances" />
 
 ## Send events to instances
 
