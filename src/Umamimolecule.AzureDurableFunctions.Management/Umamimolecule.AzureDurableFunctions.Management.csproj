@@ -11,6 +11,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Azure Durable Functions Management HTTP Endpoints</PackageTags>
     <Description>Package to add orchestration instance management HTTP endpoints for your Azure Durable Functions project.</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DurableTask" Version="2.1.0" />
