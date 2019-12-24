@@ -32,7 +32,7 @@ Let's create a durable function project and add the management package so we can
 
 What you'll need:
  - Visual Studio (For this tutorial I'm using VS 2019)
- - Postman or a similar tool to issue GET and POST requests. [Here is a Postman collection](tools/DurableFunctions%20Instance%20Management.postman_collection.json) you may find useful.
+ - Postman or a similar tool to issue GET and POST requests. [Here is a Postman collection](tools/DurableFunctions%20Instance%20Management.postman_collection.json) you may find useful as it contains all of the endpoints with the query parameters set up.
 
 ### 1. Create a new Azure Functions project
 
