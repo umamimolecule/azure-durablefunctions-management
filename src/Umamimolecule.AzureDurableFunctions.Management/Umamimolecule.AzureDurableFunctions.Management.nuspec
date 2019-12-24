@@ -8,9 +8,9 @@
     <owners>Umamimolecule</owners>
     <projectUrl>https://github.com/umamimolecule/azure-durablefunctions-management</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package to add management HTTP endpoints for an Azure Durable Functions assembly.</description>
+    <description>Package to add orchestration instance management HTTP endpoints for your Azure Durable Functions project.</description>
     <copyright>Umamimolecule 2019</copyright>
-    <tags>NugetPackages Azure Durable Functions Management Endpoints</tags>
+    <tags>Azure Durable Functions Management Endpoints</tags>
     <dependencies>
       <dependency id="Microsoft.Azure.WebJobs.Extensions.DurableTask" version="2.1.0" />
       <dependency id="Microsoft.NET.Sdk.Functions" version="1.0.29" />
