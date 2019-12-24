@@ -46,7 +46,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                 }
                 else
                 {
-                    return new OkObjectResult(status);
+                    return new OkObjectResult(new Models.DurableOrchestrationStatus(status));
                 }
             }
             catch (StatusCodeException e)

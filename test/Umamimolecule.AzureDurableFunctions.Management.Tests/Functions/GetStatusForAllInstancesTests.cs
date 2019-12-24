@@ -10,6 +10,7 @@ using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Shouldly;
 using Umamimolecule.AzureDurableFunctions.Management.Functions;
 using Xunit;
@@ -48,9 +49,21 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                                                   client.Object);
                 result.ShouldNotBeNull();
                 var objectResult = result.ShouldBeOfType<OkObjectResult>();
-                var payload = objectResult.Value.ShouldBeOfType<OrchestrationStatusQueryResult>();
+                var payload = objectResult.Value.ShouldBeOfType<Models.OrchestrationStatusQueryResult>();
                 payload.ContinuationToken.ShouldBe(expectedResponse.ContinuationToken);
-                payload.DurableOrchestrationState.ShouldBe(expectedResponse.DurableOrchestrationState);
+                payload.DurableOrchestrationState.ShouldNotBeNull();
+                payload.DurableOrchestrationState.Count().ShouldBe(1);
+                var status = payload.DurableOrchestrationState.First();
+                var expectedStatus = expectedResponse.DurableOrchestrationState.First();
+                status.CreatedTime.ShouldBe(expectedStatus.CreatedTime);
+                status.CustomStatus.ShouldBe(expectedStatus.CustomStatus);
+                status.History.ShouldBe(expectedStatus.History);
+                status.Input.ShouldBe(expectedStatus.Input);
+                status.InstanceId.ShouldBe(expectedStatus.InstanceId);
+                status.LastUpdatedTime.ShouldBe(expectedStatus.LastUpdatedTime);
+                status.Name.ShouldBe(expectedStatus.Name);
+                status.Output.ShouldBe(expectedStatus.Output);
+                status.RuntimeStatus.ShouldBe(expectedStatus.RuntimeStatus);
             }
         }
 
@@ -67,14 +80,18 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                     ContinuationToken = null,
                     DurableOrchestrationState = new DurableOrchestrationStatus[]
                     {
-                    new DurableOrchestrationStatus()
-                    {
-                        CreatedTime = DateTime.Now.AddDays(-1),
-                        InstanceId = instanceId,
-                        LastUpdatedTime = DateTime.Now.AddDays(-0.5),
-                        Name = "My Instance",
-                        RuntimeStatus = OrchestrationRuntimeStatus.Running
-                    }
+                        new DurableOrchestrationStatus()
+                        {
+                            CreatedTime = DateTime.Now.AddDays(-1),
+                            InstanceId = instanceId,
+                            LastUpdatedTime = DateTime.Now.AddDays(-0.5),
+                            Name = "My Instance",
+                            RuntimeStatus = OrchestrationRuntimeStatus.Running,
+                            CustomStatus = JToken.Parse("{\"customStatus\":\"abc123\"}"),
+                            History = new JArray(JToken.Parse("{\"history[0]\":\"abc123\"}")),
+                            Input = JToken.Parse("{\"input\":\"abc123\"}"),
+                            Output = JToken.Parse("{\"output\":\"abc123\"}"),
+                        }
                     }
                 };
 
@@ -98,9 +115,21 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                                                   client.Object);
                 result.ShouldNotBeNull();
                 var objectResult = result.ShouldBeOfType<OkObjectResult>();
-                var payload = objectResult.Value.ShouldBeOfType<OrchestrationStatusQueryResult>();
+                var payload = objectResult.Value.ShouldBeOfType<Models.OrchestrationStatusQueryResult>();
                 payload.ContinuationToken.ShouldBe(expectedResponse.ContinuationToken);
-                payload.DurableOrchestrationState.ShouldBe(expectedResponse.DurableOrchestrationState);
+                payload.DurableOrchestrationState.ShouldNotBeNull();
+                payload.DurableOrchestrationState.Count().ShouldBe(1);
+                var status = payload.DurableOrchestrationState.First();
+                var expectedStatus = expectedResponse.DurableOrchestrationState.First();
+                status.CreatedTime.ShouldBe(expectedStatus.CreatedTime);
+                status.CustomStatus.ShouldBe(expectedStatus.CustomStatus);
+                status.History.ShouldBe(expectedStatus.History);
+                status.Input.ShouldBe(expectedStatus.Input);
+                status.InstanceId.ShouldBe(expectedStatus.InstanceId);
+                status.LastUpdatedTime.ShouldBe(expectedStatus.LastUpdatedTime);
+                status.Name.ShouldBe(expectedStatus.Name);
+                status.Output.ShouldBe(expectedStatus.Output);
+                status.RuntimeStatus.ShouldBe(expectedStatus.RuntimeStatus);
             }
         }
 

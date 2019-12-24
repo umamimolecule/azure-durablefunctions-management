@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
@@ -8,6 +9,7 @@ using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Shouldly;
 using Umamimolecule.AzureDurableFunctions.Management.Functions;
 using Xunit;
@@ -38,7 +40,11 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                     InstanceId = instanceId,
                     LastUpdatedTime = DateTime.Now.AddDays(-0.5),
                     Name = "My Instance",
-                    RuntimeStatus = OrchestrationRuntimeStatus.Running
+                    RuntimeStatus = OrchestrationRuntimeStatus.Running,
+                    CustomStatus = JToken.Parse("{\"customStatus\":\"abc123\"}"),
+                    History = new JArray(JToken.Parse("{\"history[0]\":\"abc123\"}")),
+                    Input = JToken.Parse("{\"input\":\"abc123\"}"),
+                    Output = JToken.Parse("{\"output\":\"abc123\"}"),
                 };
 
                 var query = new QueryCollection(new Dictionary<string, StringValues>()
@@ -55,8 +61,16 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                                                   instanceId);
                 result.ShouldNotBeNull();
                 var objectResult = result.ShouldBeOfType<OkObjectResult>();
-                var payload = objectResult.Value.ShouldBeOfType<DurableOrchestrationStatus>();
-                payload.ShouldBe(expectedResponse);
+                var payload = objectResult.Value.ShouldBeOfType<Models.DurableOrchestrationStatus>();
+                payload.CreatedTime.ShouldBe(expectedResponse.CreatedTime);
+                payload.CustomStatus.ShouldBe(expectedResponse.CustomStatus);
+                payload.History.ShouldBe(expectedResponse.History);
+                payload.Input.ShouldBe(expectedResponse.Input);
+                payload.InstanceId.ShouldBe(expectedResponse.InstanceId);
+                payload.LastUpdatedTime.ShouldBe(expectedResponse.LastUpdatedTime);
+                payload.Name.ShouldBe(expectedResponse.Name);
+                payload.Output.ShouldBe(expectedResponse.Output);
+                payload.RuntimeStatus.ShouldBe(expectedResponse.RuntimeStatus);
             }
         }
 

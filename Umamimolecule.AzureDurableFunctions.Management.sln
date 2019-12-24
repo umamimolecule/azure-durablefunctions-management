@@ -5,7 +5,25 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umamimolecule.AzureDurableFunctions.Management", "src\Umamimolecule.AzureDurableFunctions.Management\Umamimolecule.AzureDurableFunctions.Management.csproj", "{C46C0C23-8837-4158-A36C-0A481F7A8AFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umamimolecule.AzureDurableFunctions.Management.Tests", "test\Umamimolecule.AzureDurableFunctions.Management.Tests\Umamimolecule.AzureDurableFunctions.Management.Tests.csproj", "{3FEE1FC9-2555-41CA-B77A-155DABC15F38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umamimolecule.AzureDurableFunctions.Management.Tests", "test\Umamimolecule.AzureDurableFunctions.Management.Tests\Umamimolecule.AzureDurableFunctions.Management.Tests.csproj", "{3FEE1FC9-2555-41CA-B77A-155DABC15F38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9874E13F-6E8B-40C3-BA79-6DEBCD35353C}"
+	ProjectSection(SolutionItems) = preProject
+		docs\documentation.md = docs\documentation.md
+		docs\functionsconsole.png = docs\functionsconsole.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{AEFFEE4B-702B-40EA-A11A-898EA619E9EA}"
+	ProjectSection(SolutionItems) = preProject
+		tools\DurableFunctions Instance Management.postman_collection.json = tools\DurableFunctions Instance Management.postman_collection.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4AA92B04-4F61-4023-8E7A-91A827252CC2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +42,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9874E13F-6E8B-40C3-BA79-6DEBCD35353C} = {4AA92B04-4F61-4023-8E7A-91A827252CC2}
+		{AEFFEE4B-702B-40EA-A11A-898EA619E9EA} = {4AA92B04-4F61-4023-8E7A-91A827252CC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {091F1794-B6CC-4359-9726-4E4861449AEA}

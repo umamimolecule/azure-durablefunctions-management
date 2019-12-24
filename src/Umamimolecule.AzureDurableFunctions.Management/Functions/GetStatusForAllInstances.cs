@@ -27,13 +27,18 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                     OrchestrationStatusQueryCondition condition;
                     condition = this.BuildQueryCondition(req);
 
-                    var status = await client.GetStatusAsync(condition, CancellationToken.None);
-                    return new OkObjectResult(status);
+                    var result = await client.GetStatusAsync(condition, CancellationToken.None);
+                    return new OkObjectResult(new Models.OrchestrationStatusQueryResult(result));
                 }
                 else
                 {
-                    var status = await client.GetStatusAsync();
-                    return new OkObjectResult(new OrchestrationStatusQueryResult() { DurableOrchestrationState = status });
+                    var statuses = await client.GetStatusAsync();
+                    return new OkObjectResult(
+                        new Models.OrchestrationStatusQueryResult()
+                        {
+                            DurableOrchestrationState = statuses.Select(x => new Models.DurableOrchestrationStatus(x))
+                        }
+                    );
                 }
             }
             catch (StatusCodeException e)
