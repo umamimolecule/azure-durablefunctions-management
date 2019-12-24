@@ -13,7 +13,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     public class TerminateInstance
     {
         [FunctionName("TerminateInstance")]
-        public async Task<IActionResult> Run(
+        public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "instances/{instanceId}/terminate")]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client,
             string instanceId)

@@ -15,7 +15,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     public class StartInstance
     {
         [FunctionName("StartInstance")]
-        public async Task<IActionResult> Run(
+        public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "instances/startNew")]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client)
         {

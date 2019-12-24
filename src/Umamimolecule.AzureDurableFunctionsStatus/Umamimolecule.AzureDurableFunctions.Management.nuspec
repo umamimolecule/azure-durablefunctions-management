@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata minClientVersion="2.5">
+    <id>Umamimolecule.AzureDurableFunctions.Management</id>
+    <version>1.0.0</version>
+    <title>Umamimolecule.AzureDurableFunctions.Management</title>
+    <authors>Umamimolecule</authors>
+    <owners>Umamimolecule</owners>
+    <projectUrl>https://github.com/umamimolecule/azure-durablefunctions-status</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package to add management HTTP endpoints for an Azure Durable Functions assembly.</description>
+    <copyright>Umamimolecule 2019</copyright>
+    <tags>NugetPackages Azure Durable Functions Management Endpoints</tags>
+    <dependencies>
+      <dependency id="Microsoft.Azure.WebJobs.Extensions.DurableTask" version="2.1.0" />
+      <dependency id="Microsoft.NET.Sdk.Functions" version="1.0.29" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="build\**\*" target="build" />
+
+    <!-- Include function folders -->
+    <file src="bin\$configuration$\GetManagementWebhookUrls\*" target="functions\GetManagementWebhookUrls" />
+    <file src="bin\$configuration$\GetStatusForAllInstances\*" target="functions\GetStatusForAllInstances" />
+    <file src="bin\$configuration$\GetStatusForInstance\*" target="functions\GetStatusForInstance" />
+    <file src="bin\$configuration$\PurgeInstanceHistory\*" target="functions\PurgeInstanceHistory" />
+    <file src="bin\$configuration$\PurgeInstanceHistoryForCondition\*" target="functions\PurgeInstanceHistoryForCondition" />
+    <file src="bin\$configuration$\RaiseEvent\*" target="functions\RaiseEvent" />
+    <file src="bin\$configuration$\RewindInstance\*" target="functions\RewindInstance" />
+    <file src="bin\$configuration$\StartInstance\*" target="functions\StartInstance" />
+    <file src="bin\$configuration$\TerminateInstance\*" target="functions\TerminateInstance" />
+  </files>
+</package>
