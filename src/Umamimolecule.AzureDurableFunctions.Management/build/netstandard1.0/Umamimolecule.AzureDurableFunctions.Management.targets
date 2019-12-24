@@ -1,0 +1,17 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+  ********************************************************************************************
+  Target: CopyFunctionMetadata
+  Copy the functions to the build folder
+  ********************************************************************************************
+  -->
+	<ItemGroup>
+	  <FunctionFolders Include='$(MSBuildThisFileDirectory)../../functions/**/*'/>
+	</ItemGroup>
+
+	<Target Name='CopyFunctionMetadata' AfterTargets="Build">
+    <Message Text="Copying function metadata..."></Message>
+    <Copy SourceFiles='@(FunctionFolders)' DestinationFiles='$(TargetDir)\%(RecursiveDir)%(Filename)%(Extension)'/>
+    <Message Text="Function metadata copied."></Message>
+	</Target>
+</Project>
