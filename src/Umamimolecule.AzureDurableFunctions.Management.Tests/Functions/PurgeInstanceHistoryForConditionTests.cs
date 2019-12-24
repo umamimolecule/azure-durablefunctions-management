@@ -18,66 +18,72 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [Fact]
         public async Task Success()
         {
-            using var fixture = this.CreateTestFixture();
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
-                { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                { "runtimeStatus", "Completed, Running" },
-            });
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object);
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<AcceptedResult>();
+                var client = fixture.Client;
+
+                var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+                {
+                    { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
+                    { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
+                    { "runtimeStatus", "Completed, Running" },
+                });
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+                result.ShouldNotBeNull();
+                result.ShouldBeOfType<AcceptedResult>();
+            }
         }
 
         [Fact]
         public async Task MissingCreatedTimeFrom()
         {
-            using var fixture = this.CreateTestFixture();
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                { "runtimeStatus", "Completed, Running" },
-            });
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object);
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(400);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("BADREQUEST");
-            payload.Error.Message.ShouldBe("The required query parameter 'CreatedTimeFrom' was missing.");
+                var client = fixture.Client;
+
+                var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+                {
+                    { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
+                    { "runtimeStatus", "Completed, Running" },
+                });
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(400);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("BADREQUEST");
+                payload.Error.Message.ShouldBe("The required query parameter 'CreatedTimeFrom' was missing.");
+            }
         }
 
         [Fact]
         public async Task UnexpectedException()
         {
-            using var fixture = this.CreateTestFixture();
-            var client = fixture.Client;
-
-            client.Setup(x => x.PurgeInstanceHistoryAsync(It.IsAny<DateTime>(), It.IsAny<DateTime?>(), It.IsAny<IEnumerable<OrchestrationStatus>>()))
-                  .ThrowsAsync(new ApplicationException("Oops"));
-
-            var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
-                { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                { "runtimeStatus", "Completed, Running" },
-            });
+                var client = fixture.Client;
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object);
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(500);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
-            payload.Error.Message.ShouldBe("Oops");
+                client.Setup(x => x.PurgeInstanceHistoryAsync(It.IsAny<DateTime>(), It.IsAny<DateTime?>(), It.IsAny<IEnumerable<OrchestrationStatus>>()))
+                      .ThrowsAsync(new ApplicationException("Oops"));
+
+                var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+                {
+                    { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
+                    { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
+                    { "runtimeStatus", "Completed, Running" },
+                });
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(500);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
+                payload.Error.Message.ShouldBe("Oops");
+            }
         }
 
         private HttpRequest CreateValidRequest(IQueryCollection query = null)

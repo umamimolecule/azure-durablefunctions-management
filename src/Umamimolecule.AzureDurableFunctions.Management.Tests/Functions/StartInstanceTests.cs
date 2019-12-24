@@ -19,27 +19,29 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [Fact]
         public async Task Success_NoBody()
         {
-            using var fixture = this.CreateTestFixture();
-            var orchestratorFunctionName = "MyFunction";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "orchestratorFunctionName", orchestratorFunctionName },
-            });
+                var orchestratorFunctionName = "MyFunction";
+                var client = fixture.Client;
 
-            client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
-                  .ReturnsAsync("random");
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "orchestratorFunctionName", orchestratorFunctionName },
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                                    client.Object);
+                client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
+                      .ReturnsAsync("random");
 
-            client.Verify(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null), Times.Once);
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                        client.Object);
 
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<OkObjectResult>();
-            var payloadJson = JsonConvert.SerializeObject(objectResult.Value);
-            payloadJson.ShouldBe("{\"instanceId\":\"random\"}");
+                client.Verify(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null), Times.Once);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<OkObjectResult>();
+                var payloadJson = JsonConvert.SerializeObject(objectResult.Value);
+                payloadJson.ShouldBe("{\"instanceId\":\"random\"}");
+            }
         }
 
         [Theory]
@@ -49,35 +51,37 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [InlineData("instance123")]
         public async Task Success_WithBody(string instanceId)
         {
-            using var fixture = this.CreateTestFixture();
-            var orchestratorFunctionName = "MyFunction";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "orchestratorFunctionName", orchestratorFunctionName },
-                { "instanceId", instanceId }
-            });
+                var orchestratorFunctionName = "MyFunction";
+                var client = fixture.Client;
 
-            dynamic body = new
-            {
-                id = 1,
-                name = "Fred"
-            };
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "orchestratorFunctionName", orchestratorFunctionName },
+                    { "instanceId", instanceId }
+                });
 
-            var expectedInstanceId = string.IsNullOrWhiteSpace(instanceId) ? "random" : instanceId;
-            object receivedObject = null;
-            client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.IsNullOrWhiteSpace(instanceId) ? string.Empty : instanceId, It.IsAny<object>()))
-                  .ReturnsAsync(expectedInstanceId)
-                  .Callback((string i, string e, object o) => { receivedObject = o; });
+                dynamic body = new
+                {
+                    id = 1,
+                    name = "Fred"
+                };
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
-                                                    client.Object);
+                var expectedInstanceId = string.IsNullOrWhiteSpace(instanceId) ? "random" : instanceId;
+                object receivedObject = null;
+                client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.IsNullOrWhiteSpace(instanceId) ? string.Empty : instanceId, It.IsAny<object>()))
+                      .ReturnsAsync(expectedInstanceId)
+                      .Callback((string i, string e, object o) => { receivedObject = o; });
 
-            var objectResult = result as OkObjectResult;
-            objectResult.ShouldNotBeNull();
-            var payloadJson = JsonConvert.SerializeObject(objectResult.Value);
-            payloadJson.ShouldBe("{\"instanceId\":\"" + expectedInstanceId + "\"}");
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
+                                                        client.Object);
+
+                var objectResult = result as OkObjectResult;
+                objectResult.ShouldNotBeNull();
+                var payloadJson = JsonConvert.SerializeObject(objectResult.Value);
+                payloadJson.ShouldBe("{\"instanceId\":\"" + expectedInstanceId + "\"}");
+            }
         }
 
         [Theory]
@@ -86,74 +90,80 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [InlineData("\t")]
         public async Task MissingOrNullOrchestratorFunctionName(string orchestratorFunctionName)
         {
-            using var fixture = this.CreateTestFixture();
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "orchestratorFunctionName", orchestratorFunctionName },
-            });
+                var client = fixture.Client;
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                                    client.Object);
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(400);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("BADREQUEST");
-            payload.Error.Message.ShouldBe("The required query parameter 'OrchestratorFunctionName' was missing.");
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "orchestratorFunctionName", orchestratorFunctionName },
+                });
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                        client.Object);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(400);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("BADREQUEST");
+                payload.Error.Message.ShouldBe("The required query parameter 'OrchestratorFunctionName' was missing.");
+            }
         }
 
         [Fact]
         public async Task OrchestratorFunctionNameNotFound()
         {
-            using var fixture = this.CreateTestFixture();
-            string orchestratorFunctionName = "MyFunction";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "orchestratorFunctionName", orchestratorFunctionName },
-            });
+                string orchestratorFunctionName = "MyFunction";
+                var client = fixture.Client;
 
-            client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
-                  .ThrowsAsync(new ArgumentException($"A function with name {orchestratorFunctionName} cannot be found."));
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "orchestratorFunctionName", orchestratorFunctionName },
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                                    client.Object);
+                client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
+                      .ThrowsAsync(new ArgumentException($"A function with name {orchestratorFunctionName} cannot be found."));
 
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<NotFoundObjectResult>();
-            objectResult.StatusCode.ShouldBe(404);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("NOTFOUND");
-            payload.Error.Message.ShouldBe($"A function with name {orchestratorFunctionName} cannot be found.");
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                        client.Object);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<NotFoundObjectResult>();
+                objectResult.StatusCode.ShouldBe(404);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("NOTFOUND");
+                payload.Error.Message.ShouldBe($"A function with name {orchestratorFunctionName} cannot be found.");
+            }
         }
 
         [Fact]
         public async Task UnexpectedException()
         {
-            using var fixture = this.CreateTestFixture();
-            string orchestratorFunctionName = "MyFunction";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "orchestratorFunctionName", orchestratorFunctionName },
-            });
+                string orchestratorFunctionName = "MyFunction";
+                var client = fixture.Client;
 
-            client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
-                  .ThrowsAsync(new ApplicationException("Oops"));
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "orchestratorFunctionName", orchestratorFunctionName },
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object);
-            
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(500);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
-            payload.Error.Message.ShouldBe("Oops");
+                client.Setup(x => x.StartNewAsync(orchestratorFunctionName, string.Empty, (object)null))
+                      .ThrowsAsync(new ApplicationException("Oops"));
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(500);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
+                payload.Error.Message.ShouldBe("Oops");
+            }
         }
 
         private HttpRequest CreateValidRequest(IQueryCollection query = null, object body = null)

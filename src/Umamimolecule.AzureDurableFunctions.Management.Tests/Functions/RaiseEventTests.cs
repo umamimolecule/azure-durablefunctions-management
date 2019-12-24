@@ -19,96 +19,102 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [Fact]
         public async Task Success_NoBody()
         {
-            using var fixture = this.CreateTestFixture();
-            var instanceId = "1";
-            var eventName = "MyEvent";
-            var client = fixture.Client;
+            using (var fixture = this.CreateTestFixture())
+            {
+                var instanceId = "1";
+                var eventName = "MyEvent";
+                var client = fixture.Client;
 
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
             {
                 { "eventName", eventName }
             });
-                 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object,
-                                              instanceId);
 
-            client.Verify(x => x.RaiseEventAsync(instanceId, eventName, null), Times.Once);
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object,
+                                                  instanceId);
 
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<AcceptedResult>();
+                client.Verify(x => x.RaiseEventAsync(instanceId, eventName, null), Times.Once);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<AcceptedResult>();
+            }
         }
 
         [Fact]
         public async Task Success_WithBody()
         {
-            using var fixture = this.CreateTestFixture();
-            var instanceId = "1";
-            var eventName = "MyEvent";
-            var client = fixture.Client;
+            using (var fixture = this.CreateTestFixture())
+            {
+                var instanceId = "1";
+                var eventName = "MyEvent";
+                var client = fixture.Client;
 
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
             {
                 { "eventName", eventName }
             });
 
-            dynamic body = new
-            {
-                id = 1,
-                name = "Fred"
-            };
+                dynamic body = new
+                {
+                    id = 1,
+                    name = "Fred"
+                };
 
-            object receivedObject = null;
-            client.Setup(x => x.RaiseEventAsync(instanceId, eventName, It.IsAny<object>()))
-                  .Callback((string i, string e, object o) => { receivedObject = o; });
+                object receivedObject = null;
+                client.Setup(x => x.RaiseEventAsync(instanceId, eventName, It.IsAny<object>()))
+                      .Callback((string i, string e, object o) => { receivedObject = o; });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
-                                              client.Object,
-                                              instanceId);
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
+                                                  client.Object,
+                                                  instanceId);
 
-            var objectResult = result as AcceptedResult;
-            objectResult.ShouldNotBeNull();
-            client.Verify(x => x.RaiseEventAsync(instanceId, eventName, It.IsAny<object>()), Times.Once);
-            var receivedObjectJson = JsonConvert.SerializeObject(receivedObject);
-            receivedObjectJson.ShouldBe((string)JsonConvert.SerializeObject(body));
+                var objectResult = result as AcceptedResult;
+                objectResult.ShouldNotBeNull();
+                client.Verify(x => x.RaiseEventAsync(instanceId, eventName, It.IsAny<object>()), Times.Once);
+                var receivedObjectJson = JsonConvert.SerializeObject(receivedObject);
+                receivedObjectJson.ShouldBe((string)JsonConvert.SerializeObject(body));
+            }
         }
 
         [Fact]
         public async Task Success_WithBodyAndTaskHubName()
         {
-            using var fixture = this.CreateTestFixture();
-            var instanceId = "1";
-            var eventName = "MyEvent";
-            var taskHubName = "MyTaskHub";
-            var connectionName = "MyConnection";
-            var client = fixture.Client;
+            using (var fixture = this.CreateTestFixture())
+            {
+                var instanceId = "1";
+                var eventName = "MyEvent";
+                var taskHubName = "MyTaskHub";
+                var connectionName = "MyConnection";
+                var client = fixture.Client;
 
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
             {
                 { "eventName", eventName },
                 { "taskHubName", taskHubName },
                 { "connectionName", connectionName }
             });
 
-            dynamic body = new
-            {
-                id = 1,
-                name = "Fred"
-            };
+                dynamic body = new
+                {
+                    id = 1,
+                    name = "Fred"
+                };
 
-            object receivedObject = null;
-            client.Setup(x => x.RaiseEventAsync(taskHubName, instanceId, eventName, It.IsAny<object>(), connectionName))
-                  .Callback((string t, string i, string e, object o, string c) => { receivedObject = o; });
+                object receivedObject = null;
+                client.Setup(x => x.RaiseEventAsync(taskHubName, instanceId, eventName, It.IsAny<object>(), connectionName))
+                      .Callback((string t, string i, string e, object o, string c) => { receivedObject = o; });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
-                                              client.Object,
-                                              instanceId);
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query, body),
+                                                  client.Object,
+                                                  instanceId);
 
-            var objectResult = result as AcceptedResult;
-            objectResult.ShouldNotBeNull();
-            client.Verify(x => x.RaiseEventAsync(taskHubName, instanceId, eventName, It.IsAny<object>(), connectionName), Times.Once);
-            var receivedObjectJson = JsonConvert.SerializeObject(receivedObject);
-            receivedObjectJson.ShouldBe((string)JsonConvert.SerializeObject(body));
+                var objectResult = result as AcceptedResult;
+                objectResult.ShouldNotBeNull();
+                client.Verify(x => x.RaiseEventAsync(taskHubName, instanceId, eventName, It.IsAny<object>(), connectionName), Times.Once);
+                var receivedObjectJson = JsonConvert.SerializeObject(receivedObject);
+                receivedObjectJson.ShouldBe((string)JsonConvert.SerializeObject(body));
+            }
         }
 
         [Theory]
@@ -117,102 +123,110 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         [InlineData("\t")]
         public async Task MissingOrNullInstanceId(string instanceId)
         {
-            using var fixture = this.CreateTestFixture();
-            var client = fixture.Client;
+            using (var fixture = this.CreateTestFixture())
+            {
+                var client = fixture.Client;
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(),
-                                              client.Object,
-                                              instanceId);
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(400);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("BADREQUEST");
-            payload.Error.Message.ShouldBe("The required parameter 'instanceId' was missing.");
+                var result = await fixture.Instance.Run(this.CreateValidRequest(),
+                                                  client.Object,
+                                                  instanceId);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(400);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("BADREQUEST");
+                payload.Error.Message.ShouldBe("The required parameter 'instanceId' was missing.");
+            }
         }
 
         [Fact]
         public async Task InstanceIdNotFound()
         {
-            using var fixture = this.CreateTestFixture();
-            string instanceId = "1";
-            string eventName = "MyEvent";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "eventName", eventName }
-            });
+                string instanceId = "1";
+                string eventName = "MyEvent";
+                var client = fixture.Client;
 
-            client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
-                  .ThrowsAsync(new ArgumentException("Oops", "instanceId"));
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "eventName", eventName }
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object,
-                                              instanceId);
+                client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
+                      .ThrowsAsync(new ArgumentException("Oops", "instanceId"));
 
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<NotFoundObjectResult>();
-            objectResult.StatusCode.ShouldBe(404);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("NOTFOUND");
-            payload.Error.Message.ShouldBe("No instance with ID '1' was found.");
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object,
+                                                  instanceId);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<NotFoundObjectResult>();
+                objectResult.StatusCode.ShouldBe(404);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("NOTFOUND");
+                payload.Error.Message.ShouldBe("No instance with ID '1' was found.");
+            }
         }
 
         [Fact]
         public async Task UnexpectedArgumentException()
         {
-            using var fixture = this.CreateTestFixture();
-            string instanceId = "1";
-            string eventName = "MyEvent";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "eventName", eventName }
-            });
+                string instanceId = "1";
+                string eventName = "MyEvent";
+                var client = fixture.Client;
 
-            client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
-                  .ThrowsAsync(new ArgumentException("Oops", "notInstanceId"));
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "eventName", eventName }
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object,
-                                              instanceId);
+                client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
+                      .ThrowsAsync(new ArgumentException("Oops", "notInstanceId"));
 
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(500);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
-            payload.Error.Message.ShouldBe("Oops (Parameter 'notInstanceId')");
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object,
+                                                  instanceId);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(500);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
+                payload.Error.Message.ShouldBe("Oops\r\nParameter name: notInstanceId");
+            }
         }
 
         [Fact]
         public async Task UnexpectedException()
         {
-            using var fixture = this.CreateTestFixture();
-            string instanceId = "1";
-            string eventName = "MyEvent";
-            var client = fixture.Client;
-
-            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            using (var fixture = this.CreateTestFixture())
             {
-                { "eventName", eventName }
-            });
+                string instanceId = "1";
+                string eventName = "MyEvent";
+                var client = fixture.Client;
 
-            client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
-                  .ThrowsAsync(new ApplicationException("Oops"));
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "eventName", eventName }
+                });
 
-            var result = await fixture.Instance.Run(this.CreateValidRequest(query),
-                                              client.Object,
-                                              instanceId);
-            
-            result.ShouldNotBeNull();
-            var objectResult = result.ShouldBeOfType<ObjectResult>();
-            objectResult.StatusCode.ShouldBe(500);
-            var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
-            payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
-            payload.Error.Message.ShouldBe("Oops");
+                client.Setup(x => x.RaiseEventAsync(instanceId, eventName, null))
+                      .ThrowsAsync(new ApplicationException("Oops"));
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object,
+                                                  instanceId);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(500);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("INTERNALSERVERERROR");
+                payload.Error.Message.ShouldBe("Oops");
+            }
         }
 
         private HttpRequest CreateValidRequest(IQueryCollection query = null, object body = null)
