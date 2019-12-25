@@ -30,6 +30,10 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                 await client.RewindAsync(instanceId, reason);
                 return new AcceptedResult();
             }
+            catch (InvalidOperationException ioe)
+            {
+                return ResponseHelper.CreateInvalidOperationResult(ioe.Message);
+            }
             catch (ArgumentException ae)
             {
                 if (string.Compare(ae.ParamName, "instanceId", true) == 0)

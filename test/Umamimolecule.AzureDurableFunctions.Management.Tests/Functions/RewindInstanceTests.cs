@@ -132,6 +132,38 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         }
 
         [Fact]
+        public async Task InvalidOperationException()
+        {
+            using (var fixture = this.CreateTestFixture())
+            {
+                string instanceId = "1";
+                string reason = "It's stuck";
+                var client = fixture.Client;
+
+                var query = new QueryCollection(new Dictionary<string, StringValues>()
+                {
+                    { "reason", reason }
+                });
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                client.Setup(x => x.RewindAsync(instanceId, reason))
+#pragma warning restore CS0618 // Type or member is obsolete
+                      .ThrowsAsync(new InvalidOperationException("Oops"));
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object,
+                                                  instanceId);
+
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(400);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("INVALIDOPERATION");
+                payload.Error.Message.ShouldBe("Oops");
+            }
+        }
+
+        [Fact]
         public async Task UnexpectedArgumentException()
         {
             using (var fixture = this.CreateTestFixture())
