@@ -17,7 +17,7 @@
 
 Starts a new instance. Internally, this method enqueues a message into the control queue, which then triggers the start of a function with the specified name that uses the orchestration trigger binding.
 
-`[POST] http://localhost:7071/api/orchestration/instances/startNew`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/startNew`
 
 **Query parameters**
  - OrchestratorFunctionName (**Required**): The name of the orchestrator function to start.
@@ -40,7 +40,7 @@ Payload is any JSON body you want to pass into the orchestration instance.
 **Example**
 
 ```
-POST http://localhost:7071/api/orchestration/instances/startNew?orchestratorFunctionName=MyDurableFunction&instanceId=manualTrigger123
+POST https://yourfunctionhostname/api/orchestration/instances/startNew?orchestratorFunctionName=MyDurableFunction&instanceId=manualTrigger123
 
 Content-Type: application/json
 
@@ -65,7 +65,7 @@ From [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/azure-fu
 
 Returns information about the status of an orchestration instance.
 
-`[GET] http://localhost:7071/api/orchestration/instances/{instanceId}`
+`[GET] https://yourfunctionhostname/api/orchestration/instances/{instanceId}`
 
 **Query parameters**
  - showHistory (**Optional**): If set to true, the response contains the execution history.
@@ -125,7 +125,7 @@ Returns information about the status of an orchestration instance.
 **Example**
 
 ```
-GET http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149?showHistory=true&showHistoryOutput=true&showInput=true
+GET https://yourfunctionhostname/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149?showHistory=true&showHistoryOutput=true&showInput=true
 ```
 
 <a name="queryallinstances" />
@@ -134,7 +134,7 @@ GET http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d
 
 Query the statuses of all orchestration instances.
 
-`[GET] http://localhost:7071/api/orchestration/instances`
+`[GET] https://yourfunctionhostname/api/orchestration/instances`
 
 **Query parameters**
  - RuntimeStatus (**Optional**): A comma-delimited list of status to filter on.  Example: `runtimeStatus=Running,Completed`
@@ -192,14 +192,14 @@ Each item in the durableOrchestrationState array follows the structure for [Quer
 
 Terminates a running instance.
 
-`[POST] http://localhost:7071/api/orchestration/instances/{instanceId}/terminate`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/{instanceId}/terminate`
 
 **Query parameters**
  - Reason (**Required**): A description of why the instance was terminated.
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason=Instance%20taking%20too%20long
+POST https://yourfunctionhostname/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason=Instance%20taking%20too%20long
 ```
 
 **Notes**
@@ -214,7 +214,7 @@ From [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/azure-fu
 
 Sends an event notification to a running instance.
 
-`[POST] http://localhost:7071/api/orchestration/instances/{instanceId}/raiseEvent`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/{instanceId}/raiseEvent`
 
 **Query parameters**
  - EventName (**Required**): The name of the event.
@@ -234,7 +234,7 @@ No body content
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent?eventName=MyEvent
+POST https://yourfunctionhostname/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent?eventName=MyEvent
 
 Content-Type: application/json
 
@@ -252,17 +252,17 @@ Body:
 
 Retrieve HTTP management webhook URLs that external systems can communicate with Durable Functions through.
 
-`[GET] http://localhost:7071/api/orchestration/instances/{instanceId}/managementWebhookUrls`
+`[GET] https://yourfunctionhostname/api/orchestration/instances/{instanceId}/managementWebhookUrls`
 
 **Response**
 ```
 {
     "id": "theInstanceId",
-    "statusQueryGetUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "sendEventPostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent/{eventName}?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "terminatePostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "rewindPostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "purgeHistoryDeleteUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret"
+    "statusQueryGetUri": "https://yourfunctionhostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "sendEventPostUri": "https://yourfunctionhostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent/{eventName}?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "terminatePostUri": "https://yourfunctionhostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "rewindPostUri": "https://yourfunctionhostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "purgeHistoryDeleteUri": "https://yourfunctionhostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret"
 }
 ```
 
@@ -279,7 +279,7 @@ Retrieve HTTP management webhook URLs that external systems can communicate with
 
 Rewinds a failed instance to a previously healthy state, by putting the orchestration back into the Running state. This method will also rerun the activity or sub-orchestration execution failures that caused the orchestration failure.
 
-`[POST] http://localhost:7071/api/orchestration/instances/{instanceId}/rewind`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/{instanceId}/rewind`
 
 **Query parameters**
  - Reason (**Required**): A description of the reason for rewinding the instance.
@@ -293,7 +293,7 @@ No body content
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason=Rollback%20due%20to%20failure
+POST https://yourfunctionhostname/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason=Rollback%20due%20to%20failure
 ```
 
 **Notes**
@@ -312,7 +312,7 @@ Removes all the data associated with an orchestration.  There are two endpoints 
 
 Removes all the data associated with a specific orchestration instance.
 
-`[POST] http://localhost:7071/api/orchestration/instances/{instanceId}/purgeInstanceHistory`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/{instanceId}/purgeInstanceHistory`
 
 **Response**
 ```
@@ -326,7 +326,7 @@ Removes all the data associated with a specific orchestration instance.
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/purgeInstanceHistory
+POST https://yourfunctionhostname/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/purgeInstanceHistory
 ```
 
 **Notes**
@@ -339,7 +339,7 @@ From [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/azure-fu
 
 Removes all the data associated with orchestration instances that match specified criteria.
 
-`[POST] http://localhost:7071/api/orchestration/instances/purgeInstanceHistory`
+`[POST] https://yourfunctionhostname/api/orchestration/instances/purgeInstanceHistory`
 
 **Query parameters**
  - CreatedTimeFrom (**Required**): A date/time string to filter from.  Example: `createdTimeFrom=2019-11-13T09:30:00.000Z`
@@ -358,7 +358,7 @@ Removes all the data associated with orchestration instances that match specifie
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/purgeInstanceHistory?createdTimeFrom=2019-11-13T09:30:00.000Z&createdTimeTo=2020-11-13T09:30:00.000Z&runtimeStatus=Completed,Terminated,Failed
+POST https://yourfunctionhostname/api/orchestration/instances/purgeInstanceHistory?createdTimeFrom=2019-11-13T09:30:00.000Z&createdTimeTo=2020-11-13T09:30:00.000Z&runtimeStatus=Completed,Terminated,Failed
 ```
 **Notes**
 
