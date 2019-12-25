@@ -1,7 +1,7 @@
 # Documentation
 
 ### Table of Contents
- - [Start New Instance](#startnewinstance)  
+ - [Start new Instance](#startnewinstance)  
  - [Query instances](#queryinstances)  
  - [Query all instances](#queryallinstances)  
  - [Terminate instances](#terminateinstances)  
