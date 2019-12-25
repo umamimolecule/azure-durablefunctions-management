@@ -21,21 +21,19 @@ https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
 
 ## Introduction
 
-Provide an out-of-the-box set of management functions without having to write them for each Durable Functions project.
+This package provide an out-of-the-box set of management endpoints for your Durable Functions project.  You can query the status of orchestration instances, terminate instances, purge history, and more.
 
-Select your Durable Functions project and run the following command in the Package Manager console:
+To install, in Visual Studio select your Durable Functions project and run the following command in the Package Manager console:
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
-That's it - no additional coding is required in your project!
-
-After you add this package to your Azure Functions project, you'll automatically get the following endpoints to allow orchestration instance management:
+That's it - no additional coding is required in your project!  After you add this package to your Azure Functions project, you'll automatically get the following endpoints to allow orchestration instance management:
 
 ![Functions Console](docs/functionsconsole.png)
 
 The management endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
-All endpoints are authenticated using function-level auth (`AuthorizationLevel.Function`) which means you can lock down access to particular functions if you choose.
+Access to all the management endpoints are controlled using function-level authentication (`AuthorizationLevel.Function`) which means you can lock down access to particular functions if you so choose.
 
 ## Documentation
 
