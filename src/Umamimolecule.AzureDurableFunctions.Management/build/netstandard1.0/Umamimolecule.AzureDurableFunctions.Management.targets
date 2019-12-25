@@ -1,17 +1,29 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FunctionFolders Include='$(MSBuildThisFileDirectory)../../functions/**/*'/>
+  </ItemGroup>
+
   <!--
   ********************************************************************************************
   Target: CopyFunctionMetadata
   Copy the functions to the build folder
   ********************************************************************************************
   -->
-	<ItemGroup>
-	  <FunctionFolders Include='$(MSBuildThisFileDirectory)../../functions/**/*'/>
-	</ItemGroup>
-
-	<Target Name='CopyFunctionMetadata' AfterTargets="Build">
-    <Message Text="Copying function metadata..."></Message>
+  <Target Name='CopyFunctionMetadataAfterBuild' AfterTargets="Build">
+    <Message Text="CopyFunctionMetadataAfterBuild: Copying function metadata..."></Message>
     <Copy SourceFiles='@(FunctionFolders)' DestinationFiles='$(TargetDir)\%(RecursiveDir)%(Filename)%(Extension)'/>
-    <Message Text="Function metadata copied."></Message>
+    <Message Text="CopyFunctionMetadataAfterBuild: Function metadata copied."></Message>
 	</Target>
+
+  <!--
+  ********************************************************************************************
+  Target: CopyFunctionMetadataAfterPublish
+  Copy the functions to the publish folder
+  ********************************************************************************************
+  -->
+  <Target Name='CopyFunctionMetadataAfterPublish' AfterTargets="_FunctionsPostPublish">
+    <Message Text="CopyFunctionMetadataAfterPublish: Copying function metadata..."></Message>
+    <Copy SourceFiles='@(FunctionFolders)' DestinationFiles='$(PublishDir)\%(RecursiveDir)%(Filename)%(Extension)'/>
+    <Message Text="CopyFunctionMetadataAfterPublish: Function metadata copied."></Message>
+  </Target>
 </Project>

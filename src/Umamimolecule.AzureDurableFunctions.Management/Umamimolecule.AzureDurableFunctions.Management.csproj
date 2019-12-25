@@ -11,7 +11,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Azure Durable Functions Management HTTP Endpoints</PackageTags>
     <Description>Package to add orchestration instance management HTTP endpoints for your Azure Durable Functions project.</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <PackageReleaseNotes />
   </PropertyGroup>
   <ItemGroup>
