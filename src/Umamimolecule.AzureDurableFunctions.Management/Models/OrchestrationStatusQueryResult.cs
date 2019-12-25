@@ -8,10 +8,17 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Models
     /// </summary>
     public class OrchestrationStatusQueryResult
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrchestrationStatusQueryResult"/> class.
+        /// </summary>
         public OrchestrationStatusQueryResult()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrchestrationStatusQueryResult"/> class.
+        /// </summary>
+        /// <param name="result">The object to copy the data from.</param>
         public OrchestrationStatusQueryResult(Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult result)
         {
             this.ContinuationToken = result.ContinuationToken;

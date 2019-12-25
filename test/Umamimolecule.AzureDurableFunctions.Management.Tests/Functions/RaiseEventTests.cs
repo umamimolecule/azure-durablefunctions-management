@@ -170,7 +170,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         }
 
         [Fact]
-        public async Task InvalidState()
+        public async Task InvalidOperationException()
         {
             using (var fixture = this.CreateTestFixture())
             {

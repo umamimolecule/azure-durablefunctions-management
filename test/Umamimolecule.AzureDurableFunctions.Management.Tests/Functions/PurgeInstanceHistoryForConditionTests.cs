@@ -28,10 +28,17 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                     { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
                     { "runtimeStatus", "Completed, Running" },
                 });
+
+                client.Setup(x => x.PurgeInstanceHistoryAsync(DateTime.Parse("2019-12-13T09:30:45.123Z"), DateTime.Parse("2020-12-13T09:30:45.123Z"), new OrchestrationStatus[] { OrchestrationStatus.Completed, OrchestrationStatus.Running }))
+                      .ReturnsAsync(new Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult(3));
+
                 var result = await fixture.Instance.Run(this.CreateValidRequest(query),
                                                   client.Object);
                 result.ShouldNotBeNull();
-                result.ShouldBeOfType<AcceptedResult>();
+                var objectResult = result.ShouldBeOfType<OkObjectResult>();
+                objectResult.StatusCode.ShouldBe(200);
+                var payload = objectResult.Value.ShouldBeOfType<Models.PurgeHistoryResult>();
+                payload.InstancesDeleted.ShouldBe(3);
             }
         }
 

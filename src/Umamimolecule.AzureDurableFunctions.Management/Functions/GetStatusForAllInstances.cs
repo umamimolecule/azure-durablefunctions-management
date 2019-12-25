@@ -17,7 +17,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("GetStatusForAllInstances")]
         public virtual async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "orchestration/instances")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = Routes.GetStatusForAllInstances)]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client)
         {
             try

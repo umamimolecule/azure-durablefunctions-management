@@ -16,7 +16,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("PurgeInstanceHistoryForCondition")]
         public virtual async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "orchestration/instances/purgeInstanceHistory")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.PurgeInstanceHistoryForCondition)]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client)
         {
             try
@@ -25,8 +25,8 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                 var createdTimeTo = req.Query.GetQueryParameter("CreatedTimeTo", false, Converters.DateTimeConverter("CreatedTimeTo"), DateTime.MaxValue.AddSeconds(-1));
                 var runtimeStatus = req.Query.GetQueryParameter("RuntimeStatus", false, Converters.EnumCollectionConverter<OrchestrationStatus>("RuntimeStatus"), null);
 
-                await client.PurgeInstanceHistoryAsync(createdTimeFrom, createdTimeTo, runtimeStatus);
-                return new AcceptedResult();
+                var purgeHistoryResult = await client.PurgeInstanceHistoryAsync(createdTimeFrom, createdTimeTo, runtimeStatus);
+                return new OkObjectResult(new Models.PurgeHistoryResult(purgeHistoryResult));
             }
             catch (StatusCodeException e)
             {

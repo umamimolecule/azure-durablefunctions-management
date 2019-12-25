@@ -15,7 +15,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
     {
         [FunctionName("TerminateInstance")]
         public virtual async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "orchestration/instances/{instanceId}/terminate")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.TerminateInstance)]HttpRequest req,
             [DurableClient] IDurableOrchestrationClient client,
             string instanceId)
         {
@@ -29,6 +29,10 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                 var reason = req.Query.GetQueryParameter("Reason", true, x => x);
                 await client.TerminateAsync(instanceId, reason);
                 return new AcceptedResult();
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return ResponseHelper.CreateInvalidOperationResult(ioe.Message);
             }
             catch (ArgumentException ae)
             {
