@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
 using Umamimolecule.AzureDurableFunctions.Management.Extensions;
+using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
@@ -33,16 +34,8 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
             {
                 if (string.Compare(ae.ParamName, "instanceId", true) == 0)
                 {
-                    dynamic value = new
-                    {
-                        error = new
-                        {
-                            code = "NOTFOUND",
-                            message = string.Format(Resources.ExceptionMessages.InstanceNotFound, instanceId)
-                        }
-                    };
-
-                    return new NotFoundObjectResult(value);
+                    var message = string.Format(Resources.ExceptionMessages.InstanceNotFound, instanceId);
+                    return ResponseHelper.CreateNotFoundResult(message);
                 }
 
                 return ae.ToUnhandledErrorResult();

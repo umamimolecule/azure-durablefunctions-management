@@ -33,21 +33,11 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                 var status = await client.GetStatusAsync(instanceId, showHistory, showHistoryOutput, showInput);
                 if (status == null)
                 {
-                    dynamic value = new
-                    {
-                        error = new
-                        {
-                            code = "NOTFOUND",
-                            message = string.Format(Resources.ExceptionMessages.InstanceNotFound, instanceId)
-                        }
-                    };
+                    var message = string.Format(Resources.ExceptionMessages.InstanceNotFound, instanceId);
+                    return ResponseHelper.CreateNotFoundResult(message);
+                }
 
-                    return new NotFoundObjectResult(value);
-                }
-                else
-                {
-                    return new OkObjectResult(new Models.DurableOrchestrationStatus(status));
-                }
+                return new OkObjectResult(new Models.DurableOrchestrationStatus(status));
             }
             catch (StatusCodeException e)
             {

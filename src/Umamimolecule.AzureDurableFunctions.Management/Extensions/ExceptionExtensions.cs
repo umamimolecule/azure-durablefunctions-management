@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Extensions
 {
@@ -7,19 +8,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Extensions
     {
         public static IActionResult ToUnhandledErrorResult(this Exception exception)
         {
-            dynamic value = new
-            {
-                error = new
-                {
-                    code = "INTERNALSERVERERROR",
-                    message = exception.Message
-                }
-            };
-
-            return new ObjectResult(value)
-            {
-                StatusCode = 500
-            };
+            return ResponseHelper.CreateInternalServerErrorResult(exception.Message);
         }
     }
 }

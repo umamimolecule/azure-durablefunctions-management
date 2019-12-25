@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Exceptions
 {
@@ -14,21 +15,9 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Exceptions
 
         public HttpStatusCode StatusCode { get; private set; }
 
-        public ObjectResult ToObjectResult()
+        public IActionResult ToObjectResult()
         {
-            dynamic value = new
-            {
-                error = new
-                {
-                    code = this.StatusCode.ToString().ToUpper(),
-                    message = this.Message
-                }
-            };
-
-            return new ObjectResult(value)
-            {
-                StatusCode = (int)this.StatusCode
-            };
+            return ResponseHelper.CreateStatusCodeResult(this.StatusCode, this.Message);
         }
     }
 }

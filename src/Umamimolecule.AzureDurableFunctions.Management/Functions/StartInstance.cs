@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umamimolecule.AzureDurableFunctions.Management.Exceptions;
 using Umamimolecule.AzureDurableFunctions.Management.Extensions;
+using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
@@ -40,16 +41,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
             }
             catch (ArgumentException ae)
             {
-                dynamic value = new
-                {
-                    error = new
-                    {
-                        code = "NOTFOUND",
-                        message = ae.Message
-                    }
-                };
-
-                return new NotFoundObjectResult(value);
+                return ResponseHelper.CreateNotFoundResult(ae.Message);
             }
             catch (StatusCodeException sce)
             {
