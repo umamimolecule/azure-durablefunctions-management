@@ -5,7 +5,7 @@ Automatically adds HTTP endpoints to your .Net Azure Durable Functions project t
 
 ### Table of contents
  - [NuGet Package](#nugetpackage)  
- - [Installation](#installation)  
+ - [Introduction](#introduction)  
  - [Motivation](#motivation)  
  - [Documentation](#documentation)  
  - [Tutorial](#tutorial)  
@@ -17,27 +17,23 @@ Automatically adds HTTP endpoints to your .Net Azure Durable Functions project t
 
 https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
 
-<a name="installation"/>
+<a name="introduction"/>
 
-## Installation
+## Introduction
+
+Provide an out-of-the-box set of management functions without having to write them for each Durable Functions project.
 
 Select your Durable Functions project and run the following command in the Package Manager console:
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
-That's it - no additional coding is required in your project.
+That's it - no additional coding is required in your project!
 
-<a name="motivation"/>
-
-## Motivation
-
-Provide an out-of-the-box set of management functions without having to write them for each Durable Functions project.
-
-When you add this package to your Azure Functions project, you'll automatically get the following endpoints to allow orchestration instance management:
+After you add this package to your Azure Functions project, you'll automatically get the following endpoints to allow orchestration instance management:
 
 ![Functions Console](docs/functionsconsole.png)
 
-The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
+The management endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
 All endpoints are authenticated using function-level auth (`AuthorizationLevel.Function`) which means you can lock down access to particular functions if you choose.
 
