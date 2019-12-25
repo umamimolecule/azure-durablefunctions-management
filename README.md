@@ -39,7 +39,7 @@ When you add this package to your Azure Functions project, you'll automatically 
 
 The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
-All endpoints are authenticated using function-level auth (`AuthorizationLevel.Function`) which means you can lock down access to particular functions only if you choose.
+All endpoints are authenticated using function-level auth (`AuthorizationLevel.Function`) which means you can lock down access to particular functions if you choose.
 
 ## Documentation
 
