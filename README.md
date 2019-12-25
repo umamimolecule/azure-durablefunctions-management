@@ -25,6 +25,7 @@ Select your Durable Functions project and run the following command in the Packa
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
+That's it - no additional coding is required in your project.
 
 <a name="motivation"/>
 
