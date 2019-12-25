@@ -7,7 +7,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
 {
     public static class Converters
     {
-        public static Func<string, IEnumerable<TEnum>> EnumCollectionConverter<TEnum>(string parameterName) where TEnum : struct
+        public static Func<string, IEnumerable<TEnum>> EnumCollectionConverter<TEnum>(string parameterName, IEnumerable<TEnum> validValues = null) where TEnum : struct
         {
             return value =>
             {
@@ -19,12 +19,20 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
                     {
                         try
                         {
-                            result.Add((TEnum)Enum.Parse(typeof(TEnum), item, true));
+                            var enumValue = (TEnum)Enum.Parse(typeof(TEnum), item, true);
+                            if (validValues != null && !validValues.Contains(enumValue))
+                            {
+                                var validValueString = string.Join(", ", validValues);
+                                var message = string.Format(Resources.ExceptionMessages.InvalidParameterExceptionWithValues, item, parameterName, validValueString);
+                                throw new InvalidParameterException(message, parameterName, item);
+                            }
+
+                            result.Add(enumValue);
                         }
                         catch (ArgumentException ae)
                         {
-                            var validValues = string.Join(", ", Enum.GetNames(typeof(TEnum)));
-                            var message = string.Format(Resources.ExceptionMessages.InvalidParameterExceptionWithValues, item, parameterName, validValues);
+                            var validValueString = string.Join(", ", Enum.GetNames(typeof(TEnum)));
+                            var message = string.Format(Resources.ExceptionMessages.InvalidParameterExceptionWithValues, item, parameterName, validValueString);
                             throw new InvalidParameterException(message, parameterName, item, ae);
                         }
                     }

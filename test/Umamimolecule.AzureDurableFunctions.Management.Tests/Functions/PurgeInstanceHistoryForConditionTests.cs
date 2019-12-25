@@ -26,10 +26,10 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                 {
                     { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
                     { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                    { "runtimeStatus", "Completed, Running" },
+                    { "runtimeStatus", "Completed, Terminated, Failed" },
                 });
 
-                client.Setup(x => x.PurgeInstanceHistoryAsync(DateTime.Parse("2019-12-13T09:30:45.123Z"), DateTime.Parse("2020-12-13T09:30:45.123Z"), new OrchestrationStatus[] { OrchestrationStatus.Completed, OrchestrationStatus.Running }))
+                client.Setup(x => x.PurgeInstanceHistoryAsync(DateTime.Parse("2019-12-13T09:30:45.123Z"), DateTime.Parse("2020-12-13T09:30:45.123Z"), new OrchestrationStatus[] { OrchestrationStatus.Completed, OrchestrationStatus.Terminated, OrchestrationStatus.Failed }))
                       .ReturnsAsync(new Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult(3));
 
                 var result = await fixture.Instance.Run(this.CreateValidRequest(query),
@@ -43,6 +43,64 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
         }
 
         [Fact]
+        public async Task Success_NoRuntimeStatusFilter()
+        {
+            using (var fixture = this.CreateTestFixture())
+            {
+                var client = fixture.Client;
+
+                var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+                {
+                    { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
+                    { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
+                });
+
+                client.Setup(x => x.PurgeInstanceHistoryAsync(DateTime.Parse("2019-12-13T09:30:45.123Z"), DateTime.Parse("2020-12-13T09:30:45.123Z"), null))
+                      .ReturnsAsync(new Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult(3));
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<OkObjectResult>();
+                objectResult.StatusCode.ShouldBe(200);
+                var payload = objectResult.Value.ShouldBeOfType<Models.PurgeHistoryResult>();
+                payload.InstancesDeleted.ShouldBe(3);
+            }
+        }
+
+        [Theory]
+        [InlineData(OrchestrationStatus.Canceled)]
+        [InlineData(OrchestrationStatus.ContinuedAsNew)]
+        [InlineData(OrchestrationStatus.Pending)]
+        [InlineData(OrchestrationStatus.Running)]
+        public async Task DisallowedRuntimeStatuses(OrchestrationStatus runtimeStatus)
+        {
+            using (var fixture = this.CreateTestFixture())
+            {
+                var client = fixture.Client;
+
+                var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+                {
+                    { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
+                    { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
+                    { "runtimeStatus", runtimeStatus.ToString() },
+                });
+
+                client.Setup(x => x.PurgeInstanceHistoryAsync(DateTime.Parse("2019-12-13T09:30:45.123Z"), DateTime.Parse("2020-12-13T09:30:45.123Z"), new OrchestrationStatus[] { OrchestrationStatus.Completed, OrchestrationStatus.Running }))
+                      .ReturnsAsync(new Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult(3));
+
+                var result = await fixture.Instance.Run(this.CreateValidRequest(query),
+                                                  client.Object);
+                result.ShouldNotBeNull();
+                var objectResult = result.ShouldBeOfType<ObjectResult>();
+                objectResult.StatusCode.ShouldBe(400);
+                var payload = JsonConvert.DeserializeObject<ErrorPayload>(JsonConvert.SerializeObject(objectResult.Value));
+                payload.Error.Code.ShouldBe("BADREQUEST");
+                payload.Error.Message.ShouldBe($"Invalid value '{runtimeStatus}' for parameter 'RuntimeStatus'.  Valid values are: Completed, Terminated, Failed");
+            }
+        }
+
+        [Fact]
         public async Task MissingCreatedTimeFrom()
         {
             using (var fixture = this.CreateTestFixture())
@@ -52,7 +110,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                 var query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
                 {
                     { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                    { "runtimeStatus", "Completed, Running" },
+                    { "runtimeStatus", "Completed, Terminated, Failed" },
                 });
                 var result = await fixture.Instance.Run(this.CreateValidRequest(query),
                                                   client.Object);
@@ -79,7 +137,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                 {
                     { "createdTimeFrom", "2019-12-13T09:30:45.123Z" },
                     { "createdTimeTo", "2020-12-13T09:30:45.123Z" },
-                    { "runtimeStatus", "Completed, Running" },
+                    { "runtimeStatus", "Completed, Terminated, Failed" },
                 });
 
                 var result = await fixture.Instance.Run(this.CreateValidRequest(query),
