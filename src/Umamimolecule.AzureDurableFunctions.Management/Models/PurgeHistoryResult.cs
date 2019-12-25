@@ -10,13 +10,6 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="PurgeHistoryResult"/> class.
         /// </summary>
-        public PurgeHistoryResult()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PurgeHistoryResult"/> class.
-        /// </summary>
         /// <param name="result">The object to copy the data from.</param>
         public PurgeHistoryResult(Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult result)
         {

@@ -13,7 +13,12 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
             {
                 try
                 {
-                    List<TEnum> result = new List<TEnum>();
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return null;
+                    }
+
+                    List <TEnum> result = new List<TEnum>();
                     var items = value.Split(new string[] { ",", ";", " " }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var item in items)
                     {
@@ -42,10 +47,6 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
                 catch (InvalidParameterException)
                 {
                     throw;
-                }
-                catch (Exception e)
-                {
-                    throw new InvalidParameterException(parameterName, value, e);
                 }
             };
         }

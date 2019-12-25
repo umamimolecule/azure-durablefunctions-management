@@ -14,13 +14,6 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="DurableOrchestrationStatus"/> class.
         /// </summary>
-        public DurableOrchestrationStatus()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DurableOrchestrationStatus"/> class.
-        /// </summary>
         /// <param name="status">The object to copy the data from.</param>
         public DurableOrchestrationStatus(Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableOrchestrationStatus status)
         {
