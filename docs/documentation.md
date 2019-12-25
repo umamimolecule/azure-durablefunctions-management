@@ -34,7 +34,7 @@ Payload is any JSON body you want to pass into the orchestration instance.
 200 OK
 
 {
-   "instanceId": "51b7871c-4c71-4ad9-bb6e-e95567eda15b"
+   "instanceId": "acb2c631bf484b9da179e5a03d96f149"
 }
 ```
  - **instanceId**: The ID of the new orchestration instance.
@@ -80,14 +80,31 @@ Returns information about the status of an orchestration instance.
 
 {
     "name": "YourFunction",
-    "instanceId": "51b7871c-4c71-4ad9-bb6e-e95567eda15b",
+    "instanceId": "acb2c631bf484b9da179e5a03d96f149",
     "createdTime": "2019-11-13T09:30:10.000Z",
     "lastUpdatedTime": "2019-11-13T09:37:00.000Z",
     "input": {},
     "output": {},
     "runtimeStatus": "Running",
     "customStatus": {},
-    "history": []
+    "history": [
+        {
+            "EventType": "ExecutionStarted",
+            "Timestamp": "2019-12-24T12:39:43.1086943Z",
+            "FunctionName": "MyOrchestrator"
+        },
+        {
+            "EventType": "TaskCompleted",
+            "Timestamp": "2019-12-24T12:39:53.7277873Z",
+            "ScheduledTime": "2019-12-24T12:39:43.5561944Z",
+            "FunctionName": "PauseActivity"
+        },
+        {
+            "EventType": "ExecutionCompleted",
+            "OrchestrationStatus": "Completed",
+            "Timestamp": "2019-12-24T12:39:53.9035172Z"
+        }
+    ]
 }
 ```
 
@@ -110,7 +127,7 @@ Returns information about the status of an orchestration instance.
 **Example**
 
 ```
-GET http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b?showHistory=true&showHistoryOutput=true&showInput=true
+GET http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149?showHistory=true&showHistoryOutput=true&showInput=true
 ```
 
 <a name="queryallinstances" />
@@ -139,14 +156,31 @@ Query the statuses of all orchestration instances.
     "durableOrchestrationState": [
       {
          "name": "YourFunction",
-         "instanceId": "51b7871c-4c71-4ad9-bb6e-e95567eda15b",
+         "instanceId": "acb2c631bf484b9da179e5a03d96f149",
          "createdTime": "2019-11-13T09:30:10.000Z",
          "lastUpdatedTime": "2019-11-13T09:37:00.000Z",
          "input": {},
          "output": {},
          "runtimeStatus": "Running",
          "customStatus": {},
-         "history": []
+         "history": [
+             {
+                 "EventType": "ExecutionStarted",
+                 "Timestamp": "2019-12-24T12:39:43.1086943Z",
+                 "FunctionName": "MyOrchestrator"
+             },
+             {
+                 "EventType": "TaskCompleted",
+                 "Timestamp": "2019-12-24T12:39:53.7277873Z",
+                 "ScheduledTime": "2019-12-24T12:39:43.5561944Z",
+                 "FunctionName": "PauseActivity"
+             },
+             {
+                 "EventType": "ExecutionCompleted",
+                 "OrchestrationStatus": "Completed",
+                 "Timestamp": "2019-12-24T12:39:53.9035172Z"
+             }
+         ]
       }
     ],
     "continuationToken": "bnVsbA=="
@@ -167,7 +201,7 @@ Terminates a running instance.
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/terminate?reason=Instance%20taking%20too%20long
+POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason=Instance%20taking%20too%20long
 ```
 
 **Notes**
@@ -202,7 +236,7 @@ No body content
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/raiseEvent?eventName=MyEvent
+POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent?eventName=MyEvent
 
 Content-Type: application/json
 
@@ -226,11 +260,11 @@ Retrieve HTTP management webhook URLs that external systems can communicate with
 ```
 {
     "id": "theInstanceId",
-    "statusQueryGetUri": "http://hostname/runtime/webhooks/durabletask/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "sendEventPostUri": "http://hostname/runtime/webhooks/durabletask/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/raiseEvent/{eventName}?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "terminatePostUri": "http://hostname/runtime/webhooks/durabletask/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/terminate?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "rewindPostUri": "http://hostname/runtime/webhooks/durabletask/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/rewind?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
-    "purgeHistoryDeleteUri": "http://hostname/runtime/webhooks/durabletask/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b?taskHub=TestHubName&connection=Storage&code=base64encodedsecret"
+    "statusQueryGetUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "sendEventPostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/raiseEvent/{eventName}?taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "terminatePostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/terminate?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "rewindPostUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason={text}&taskHub=TestHubName&connection=Storage&code=base64encodedsecret",
+    "purgeHistoryDeleteUri": "http://hostname/runtime/webhooks/durabletask/instances/acb2c631bf484b9da179e5a03d96f149?taskHub=TestHubName&connection=Storage&code=base64encodedsecret"
 }
 ```
 
@@ -261,7 +295,7 @@ No body content
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/rewind?reason=Rollback%20due%20to%20failure
+POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/rewind?reason=Rollback%20due%20to%20failure
 ```
 
 **Notes**
@@ -284,14 +318,17 @@ Removes all the data associated with a specific orchestration instance.
 
 **Response**
 ```
-202 Accepted
+200 OK
 
-No body content
+{
+   "instancesDeleted": 1
+}
 ```
+ - **instancedDeleted**: The number of instances deleted.  Will be 0 if the specified instance was not found, or 1 if it was found and deleted.
 
 **Example**
 ```
-POST http://localhost:7071/api/orchestration/instances/51b7871c-4c71-4ad9-bb6e-e95567eda15b/purgeInstanceHistory
+POST http://localhost:7071/api/orchestration/instances/acb2c631bf484b9da179e5a03d96f149/purgeInstanceHistory
 ```
 
 **Notes**
@@ -309,14 +346,17 @@ Removes all the data associated with orchestration instances that match specifie
 **Query parameters**
  - CreatedTimeFrom (**Required**): A date/time string to filter from.  Example: `createdTimeFrom=2019-11-13T09:30:00.000Z`
  - CreatedTimeTo (**Optional**): A date/time string to filter to.  Example: `createdTimeTo=2020-11-13T09:30:00.000Z`
- - RuntimeStatus (**Optional**): A comma-delimited list of status to filter on.  Example: `runtimeStatus=Completed,Terminated,Failed`
+ - RuntimeStatus (**Optional**): A comma-delimited list of status to filter on.  Valid values are: Completed, Terminated, or Failed.  Example: `runtimeStatus=Completed,Terminated,Failed`
 
  **Response**
 ```
-202 Accepted
+200 OK
 
-No body content
+{
+   "instancesDeleted": 3
+}
 ```
+ - **instancedDeleted**: The number of instances that matched the conditions and were deleted.
 
 **Example**
 ```
