@@ -1,7 +1,5 @@
 # Documentation
 
-Refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-instance-management) for more information about how the management functions work.
-
 ### Table of Contents
  - [Start New Instance](#startnewinstance)  
  - [Query instances](#queryinstances)  
