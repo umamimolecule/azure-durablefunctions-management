@@ -21,11 +21,16 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Tests.Functions
                 var instanceId = "1";
                 var client = fixture.Client;
 
+                client.Setup(x => x.PurgeInstanceHistoryAsync(instanceId))
+                      .ReturnsAsync(new Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult(1));
+
                 var result = await fixture.Instance.Run(this.CreateValidRequest(),
                                                   client.Object,
                                                   instanceId);
                 result.ShouldNotBeNull();
-                var objectResult = result.ShouldBeOfType<AcceptedResult>();
+                var objectResult = result.ShouldBeOfType<OkObjectResult>();
+                var payload = objectResult.Value.ShouldBeOfType<Models.PurgeHistoryResult>();
+                payload.InstancesDeleted.ShouldBe(1);
             }
         }
 

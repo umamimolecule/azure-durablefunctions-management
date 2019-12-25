@@ -26,8 +26,8 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Functions
                     throw new RequiredParameterMissingException("instanceId");
                 }
 
-                await client.PurgeInstanceHistoryAsync(instanceId);
-                return new AcceptedResult();
+                var result = await client.PurgeInstanceHistoryAsync(instanceId);
+                return new OkObjectResult(new Models.PurgeHistoryResult(result));
             }
             catch (ArgumentException ae)
             {
