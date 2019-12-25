@@ -208,11 +208,11 @@ This should produce a response similar to the following:
     "continuationToken": null
 }
 ```
-Lets now purge the history for this instance by issuing the following POST request in Postman:
+b. Lets now purge the history for this instance by issuing the following POST request in Postman:
 ```
 http://localhost:7071/api/orchestration/instances/03517277886f4e2988d0b63627b994dc/purgeInstanceHistory
 ```
-Make sure to replace the ID above with the actual value for your instance.  Now run this GET query again:
+c. Make sure to replace the ID above with the actual value for your instance.  Now run this GET query again:
 ```
 http://localhost:7071/api/orchestration/instances
 ```
