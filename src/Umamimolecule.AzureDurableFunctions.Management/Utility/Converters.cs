@@ -18,7 +18,7 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Utility
                         return null;
                     }
 
-                    List <TEnum> result = new List<TEnum>();
+                    List<TEnum> result = new List<TEnum>();
                     var items = value.Split(new string[] { ",", ";", " " }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var item in items)
                     {
