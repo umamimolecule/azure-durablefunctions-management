@@ -1,11 +1,23 @@
 [![Build Status](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_apis/build/status/azure-durablefunctions-management%20CI?branchName=master)](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_build/latest?definitionId=15&branchName=master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15)
 
 # azure-durablefunctions-management
-Automatically adds HTTP endpoints to your Azure Durable Functions project to allow querying status of orchestration instances.
+Automatically adds HTTP endpoints to your .Net Azure Durable Functions project to allow management of orchestration instances, such as querying status, terminating instances, rewind and more.
+
+### Table of contents
+ - [NuGet Package](#nugetpackage)  
+ - [Installation](#installation)  
+ - [Motivation](#motivation)  
+ - [Documentation](#documentation)  
+ - [Tutorial](#tutorial)  
+
+---
+<a name="nugetpackage"/>
 
 ## NuGet Package
 
 https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
+
+<a name="installation"/>
 
 ## Installation
 
@@ -13,6 +25,8 @@ Select your Durable Functions project and run the following command in the Packa
 ```
 install-package Umamimolecule.AzureDurableFunctions.Management
 ```
+
+<a name="motivation"/>
 
 ## Motivation
 
@@ -22,7 +36,7 @@ When you add this package to your Azure Functions project, you'll automatically 
 
 ![Functions Console](docs/functionsconsole.png)
 
-The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overriden the default route prefix).
+The endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
 ## Documentation
 
@@ -155,7 +169,7 @@ namespace DurableFunctionsTest1
 
 Run the project by pressing F5, then execute the following GET request in Postman:
 ```
-http://localhost:7071/api/orchestration/instances
+http://localhost:7071/api/Function1
 ```
 
 The durable function should trigger and produce output similar to the following:

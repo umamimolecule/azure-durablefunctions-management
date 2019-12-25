@@ -17,7 +17,7 @@ Refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/az
 
 ## Start new instance
 
-Starts a new instance. Internally, this method enqueues a message into the control queue, which then triggers the start of a function with the specified name that uses the orchestration trigger binding..
+Starts a new instance. Internally, this method enqueues a message into the control queue, which then triggers the start of a function with the specified name that uses the orchestration trigger binding.
 
 `[POST] http://localhost:7071/api/orchestration/instances/startNew`
 
@@ -129,7 +129,7 @@ Query the statuses of all orchestration instances.
  - PageSize (**Optional**): The maximum number of results to return per request.
  - ContinuationToken (**Optional**): Retrieve a specific page of results.  Leave empty to retrieve the first page.
  - InstanceIdPrefix (**Optional**): Filters the instances whose prefix matches this value.
- - ShowInput (**Optional**): If set to truek, will include the orchestration inputs for each instance.
+ - ShowInput (**Optional**): If set to true, will include the orchestration inputs for each instance.
 
 **Response**
 ```
