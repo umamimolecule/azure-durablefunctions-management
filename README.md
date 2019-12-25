@@ -6,7 +6,6 @@ Automatically adds HTTP endpoints to your .Net Azure Durable Functions project t
 ### Table of contents
  - [NuGet Package](#nugetpackage)  
  - [Introduction](#introduction)  
- - [Motivation](#motivation)  
  - [Documentation](#documentation)  
  - [Tutorial](#tutorial)  
 
