@@ -11,8 +11,8 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Azure Durable Functions Management HTTP Endpoints</PackageTags>
     <Description>Automatically adds HTTP endpoints to your .Net Azure Durable Functions project to allow management of orchestration instances, such as querying status, terminating instances, rewind and more.</Description>
-    <Version>1.1.1</Version>
-    <PackageReleaseNotes />
+    <Version>1.1.2</Version>
+    <PackageReleaseNotes>https://github.com/umamimolecule/azure-durablefunctions-management/blob/master/CHANGELOG.md#1.1.2</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>Umamimolecule.AzureDurableFunctions.Management.ruleset</CodeAnalysisRuleSet>

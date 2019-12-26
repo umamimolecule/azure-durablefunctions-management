@@ -1,4 +1,4 @@
-[![Build Status](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_apis/build/status/azure-durablefunctions-management%20CI?branchName=master)](https://umamimolecule.visualstudio.com/azure-durablefunctions-management/_build/latest?definitionId=15&branchName=master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15) ![Nuget](https://img.shields.io/nuget/v/Umamimolecule.AzureDurableFunctions.Management)
+![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/umamimolecule/azure-durablefunctions-management/15/master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15) ![Nuget](https://img.shields.io/nuget/v/Umamimolecule.AzureDurableFunctions.Management)
 
 # azure-durablefunctions-management
 Automatically adds HTTP endpoints to your .Net Azure Durable Functions project to allow management of orchestration instances, such as querying status, terminating instances, rewind and more.

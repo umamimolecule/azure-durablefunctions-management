@@ -1,5 +1,15 @@
 # Changelog
 
+<a name="1.1.2" />
+
+## [1.1.2] - 2019-12-26
+
+### Added
+ - XML documentation for all public classes and members.
+
+### Changed
+ - Minor tweaks to readme and documentation files.
+
 <a name="1.1.1" />
 
 ## [1.1.1] - 2019-12-25
