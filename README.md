@@ -153,7 +153,7 @@ namespace DurableFunctionsTest1
                 LogLevel.Information,
                 $"PauseActivity called with instanceId = {activityContext.InstanceId}");
 
-            Thread.Sleep(30000);
+            Thread.Sleep(10000);
 
             return "Done";
         }
