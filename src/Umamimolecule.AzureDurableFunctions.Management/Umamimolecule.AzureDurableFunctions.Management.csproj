@@ -18,13 +18,13 @@
     <CodeAnalysisRuleSet>Umamimolecule.AzureDurableFunctions.Management.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>Umamimolecule.AzureDurableFunctions.Management.xml</DocumentationFile>
+    <DocumentationFile>.\Umamimolecule.AzureDurableFunctions.Management.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Umamimolecule.AzureDurableFunctions.Management.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>Umamimolecule.AzureDurableFunctions.Management.xml</DocumentationFile>
+    <DocumentationFile>.\Umamimolecule.AzureDurableFunctions.Management.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DurableTask" Version="2.1.0" />
@@ -41,6 +41,9 @@
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+    <None Update="Umamimolecule.AzureDurableFunctions.Management.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
