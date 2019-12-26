@@ -1,0 +1,569 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Umamimolecule.AzureDurableFunctions.Management</name>
+    </assembly>
+    <members>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.BadRequestException">
+            <summary>
+            Represents an exception which will return a 400 Bad Request response.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.BadRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.BadRequestException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.ErrorCodes">
+            <summary>
+            Contains the error codes returned in the response body.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Exceptions.ErrorCodes.NotFound">
+            <summary>
+            The code for when an instance cannot be found.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Exceptions.ErrorCodes.InvalidOperation">
+            <summary>
+            The code for when an invalid operation was attempted on an instance.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Exceptions.ErrorCodes.InternalServerError">
+            <summary>
+            The code for when an unexpected error occurred.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException">
+            <summary>
+            The exception to be thrown when a parameter contains an invalid value.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="parameterName">The name of the parameter.</param>
+            <param name="parameterValue">The valid of the parameter.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter.</param>
+            <param name="parameterValue">The valid of the parameter.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException.ParameterName">
+            <summary>
+            Gets the parameter name.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException.ParameterValue">
+            <summary>
+            Gets the parameter value.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredParameterMissingException">
+            <summary>
+            The exception to be thrown when a required path parameter is missing or contains an empty value.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredParameterMissingException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredParameterMissingException"/> class.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredParameterMissingException.ParameterName">
+            <summary>
+            Gets the parameter name.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException">
+            <summary>
+            The exception to be thrown when a required parameter query is missing or contains an empty value.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException"/> class.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException.ParameterName">
+            <summary>
+            Gets the parameter name.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.StatusCodeException">
+            <summary>
+            Represents an exception which will return a particular status code response.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.StatusCodeException.#ctor(System.Net.HttpStatusCode,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.StatusCodeException"/> class.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Exceptions.StatusCodeException.StatusCode">
+            <summary>
+            Gets the status code.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Exceptions.StatusCodeException.ToObjectResult">
+            <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> response using the status code and error message.
+            </summary>
+            <returns>The <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> response.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Extensions.ExceptionExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:System.Exception"/> instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Extensions.ExceptionExtensions.ToUnhandledErrorResult(System.Exception)">
+            <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing an unhandled error.
+            </summary>
+            <param name="exception">The exception.</param>
+            <returns>The <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Extensions.QueryCollectionExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:Microsoft.AspNetCore.Http.IQueryCollection"/> instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Extensions.QueryCollectionExtensions.GetQueryParameter``1(Microsoft.AspNetCore.Http.IQueryCollection,System.String,System.Boolean,System.Func{System.String,``0},``0)">
+            <summary>
+            Gets a query parameter value and validates it.
+            </summary>
+            <typeparam name="T">The object type to convert the value to.</typeparam>
+            <param name="query">The query collection.</param>
+            <param name="key">The key of the query parameter to get.</param>
+            <param name="required">Determines whether the parameter is mandatory.  If missing or has a null of empty value, a <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException"/> exception will be thrown.</param>
+            <param name="converter">The function to perform to conversion form a string to the specified type.</param>
+            <param name="defaultValue">The default value to return if the query parameter is missing or has a null or empty value.</param>
+            <returns>The query parameter value.</returns>
+            <exception cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.RequiredQueryParameterMissingException">Thrown when a required query parameter is missing or has an null or empty value.</exception>.
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.GetManagementWebhookUrls">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to management webhook URLs.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.GetManagementWebhookUrls.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to retrieve HTTP management webhook URLs that external
+            systems can communicate with Durable Functions through.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance being queried.</param>
+            <returns>A payload containing the HTTP management webhook URLs.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.GetStatusForAllInstances">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to status for multiple orchestration
+            instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.GetStatusForAllInstances.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient)">
+            <summary>
+            The Azure Function to retrieve the status for multiple orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <returns>A payload containing the statuses for matching orchestration instances.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.GetStatusForInstance">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to status for individual orchestration
+            instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.GetStatusForInstance.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to retrieve the status for individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance being queried.</param>
+            <returns>A payload containing the status for the orchestration instance.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.PurgeInstanceHistory">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to purging of history for
+            individual orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.PurgeInstanceHistory.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to purge the history for individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance being purged.</param>
+            <returns>A payload containing the number of instances purged.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.PurgeInstanceHistoryForCondition">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to purging of history for
+            multiple orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.PurgeInstanceHistoryForCondition.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient)">
+            <summary>
+            The Azure Function to purge the history for multiple orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <returns>A payload containing the number of instances purged.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.RaiseEvent">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to raising of events for
+            individual orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.RaiseEvent.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to raise events for individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance to raise the event for.</param>
+            <returns>202 Accepted if the input is valid.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.RewindInstance">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to rewinding for individual
+            orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.RewindInstance.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to rewind individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance being rewound.</param>
+            <returns>202 Accepted if the input is valid.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes">
+            <summary>
+            Contains the routes for the function endpoints.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetManagementWebhookUrls">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetManagementWebhookUrls"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetStatusForAllInstances">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetStatusForAllInstances"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetStatusForInstance">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetStatusForInstance"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.PurgeInstanceHistory">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.GetManagementWebhookUrls"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.PurgeInstanceHistoryForCondition">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.PurgeInstanceHistoryForCondition"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.RaiseEvent">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.RaiseEvent"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.RewindInstance">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.RewindInstance"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.StartInstance">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.StartInstance"/> function.
+            </summary>
+        </member>
+        <member name="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.TerminateInstance">
+            <summary>
+            The route for the <see cref="F:Umamimolecule.AzureDurableFunctions.Management.Functions.Routes.TerminateInstance"/> function.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.StartInstance">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to starting orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.StartInstance.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient)">
+            <summary>
+            The Azure Function to rewind individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <returns>A payload containing the ID of the instance that was started.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Functions.TerminateInstance">
+            <summary>
+            Contains HTTP-triggered Azure Functions related to terminating individual
+            orchestration instances.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Functions.TerminateInstance.Run(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,System.String)">
+            <summary>
+            The Azure Function to rewind individual orchestration instances.
+            </summary>
+            <param name="req">The HTTP request.</param>
+            <param name="client">The durable orchestration client.</param>
+            <param name="instanceId">The ID of the orchestration instance being terminated.</param>
+            <returns>202 Accepted if the input is valid.</returns>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus">
+            <summary>
+            Represents the status of a durable orchestration instance.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.#ctor(Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableOrchestrationStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus"/> class.
+            </summary>
+            <param name="status">The object to copy the data from.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.Name">
+            <summary>
+            Gets or sets the name of the queried orchestrator function.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.InstanceId">
+            <summary>
+            Gets or sets the ID of the queried orchestration instance.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.CreatedTime">
+            <summary>
+            Gets or sets the time at which the orchestration instance was created.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.LastUpdatedTime">
+            <summary>
+            Gets or sets the time at which the orchestration instance last updated its execution.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.Input">
+            <summary>
+            Gets or sets the input of the orchestrator function instance.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.Output">
+            <summary>
+            Gets or sets the output of the queried orchestration instance.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.RuntimeStatus">
+            <summary>
+            Gets or sets the runtime status of the queried orchestration instance.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.CustomStatus">
+            <summary>
+            Gets or sets the custom status payload (if any) that was set by the orchestrator function.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.DurableOrchestrationStatus.History">
+            <summary>
+            Gets or sets the execution history of the orchestration instance.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult">
+            <summary>
+            The status of all orchestration instances with paging for a given query.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult"/> class.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult.#ctor(Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult"/> class.
+            </summary>
+            <param name="result">The object to copy the data from.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult.DurableOrchestrationState">
+            <summary>
+            Gets or sets a collection of statuses of orchestration instances matching the query description.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.OrchestrationStatusQueryResult.ContinuationToken">
+            <summary>
+            Gets or sets a token that can be used to resume the query with data not already returned by this query.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Models.PurgeHistoryResult">
+            <summary>
+            Class to hold statistics about this execution of purge history.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Models.PurgeHistoryResult.#ctor(Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Models.PurgeHistoryResult"/> class.
+            </summary>
+            <param name="result">The object to copy the data from.</param>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Models.PurgeHistoryResult.InstancesDeleted">
+            <summary>
+            Gets or sets the number of deleted instances.
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.InstanceNotFound">
+            <summary>
+              Looks up a localized string similar to No instance with ID &apos;{0}&apos; was found..
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.InvalidParameterException">
+            <summary>
+              Looks up a localized string similar to Invalid value &apos;{0}&apos; for parameter &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.InvalidParameterExceptionWithValues">
+            <summary>
+              Looks up a localized string similar to Invalid value &apos;{0}&apos; for parameter &apos;{1}&apos;.  Valid values are: {2}.
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.RequiredParameterMissingException">
+            <summary>
+              Looks up a localized string similar to The required parameter &apos;{0}&apos; was missing..
+            </summary>
+        </member>
+        <member name="P:Umamimolecule.AzureDurableFunctions.Management.Resources.ExceptionMessages.RequiredQueryParameterMissingException">
+            <summary>
+              Looks up a localized string similar to The required query parameter &apos;{0}&apos; was missing..
+            </summary>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters">
+            <summary>
+            Contains methods to convert strings to various data types.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters.EnumCollectionConverter``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Creates a function to convert a string to a collection of enum values.
+            </summary>
+            <typeparam name="TEnum">The enum type.</typeparam>
+            <param name="parameterName">The parameter name.</param>
+            <param name="validValues">An optional collection of valid values, where if any other values are found will result in an exception being thrown.</param>
+            <returns>The function to convert a string to a collection of enum values.</returns>
+            <remarks>The input string can be delimited by a comma, semicolon or space.</remarks>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters.StringCollectionConverter(System.String)">
+            <summary>
+            Creates a function to convert a string to a collection of strings.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <returns>The function to convert a string to a collection of enum values.</returns>
+            <remarks>The input string can be delimited by a comma, semicolon or space.</remarks>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters.DateTimeConverter(System.String)">
+            <summary>
+            Creates a function to convert a string to a <see cref="T:System.DateTime"/> instance.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <returns>The function to convert a string to a <see cref="T:System.DateTime"/> instance.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters.IntConverter(System.String)">
+            <summary>
+            Creates a function to convert a string to a <see cref="T:System.Int32"/> instance.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <returns>The function to convert a string to a <see cref="T:System.Int32"/> instance.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.Converters.BoolConverter(System.String)">
+            <summary>
+            Creates a function to convert a string to a <see cref="T:System.Boolean"/> instance.
+            </summary>
+            <param name="parameterName">The parameter name.</param>
+            <returns>The function to convert a string to a <see cref="T:System.Boolean"/> instance.</returns>
+            <remarks>
+            The following string values are considered as truthy: yes, 1, true
+            The following string values are considered as false: no, 0, false
+            Any other values will result in a <see cref="T:Umamimolecule.AzureDurableFunctions.Management.Exceptions.InvalidParameterException"/> being thrown.
+            </remarks>
+        </member>
+        <member name="T:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper">
+            <summary>
+            Contains methods to create various <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> insatnces to be returned from the function endpoints.
+            </summary>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper.CreateInvalidOperationResult(System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing an invalid operation.
+            </summary>
+            <param name="message">The message to return in the response body.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing an invalid operation.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper.CreateNotFoundResult(System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing a 404 Not Found result.
+            </summary>
+            <param name="message">The message to return in the response body.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing a 404 Not Found result.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper.CreateInternalServerErrorResult(System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing an internal server error.
+            </summary>
+            <param name="message">The message to return in the response body.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance representing an internal server error.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper.CreateStatusCodeResult(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance for a specified status code.
+            </summary>
+            <param name="statusCode">The status code to be returned.</param>
+            <param name="message">The message to return in the response body.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> instance for the specified status code.</returns>
+        </member>
+        <member name="M:Umamimolecule.AzureDurableFunctions.Management.Utility.ResponseHelper.CreateError(System.String,System.String)">
+            <summary>
+            Creates a response body representing an error.
+            </summary>
+            <param name="code">The error code.</param>
+            <param name="message">The error message.</param>
+            <returns>A response body representing an error.</returns>
+        </member>
+    </members>
+</doc>
