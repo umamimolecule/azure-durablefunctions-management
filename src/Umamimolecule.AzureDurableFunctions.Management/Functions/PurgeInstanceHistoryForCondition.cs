@@ -12,15 +12,25 @@ using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
+    /// <summary>
+    /// Contains HTTP-triggered Azure Functions related to purging of history for
+    /// multiple orchestration instances.
+    /// </summary>
     public class PurgeInstanceHistoryForCondition
     {
         private static readonly OrchestrationStatus[] ValidStatuses = new OrchestrationStatus[]
         {
             OrchestrationStatus.Completed,
             OrchestrationStatus.Terminated,
-            OrchestrationStatus.Failed
+            OrchestrationStatus.Failed,
         };
 
+        /// <summary>
+        /// The Azure Function to purge the history for multiple orchestration instances.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <param name="client">The durable orchestration client.</param>
+        /// <returns>A payload containing the number of instances purged.</returns>
         [FunctionName("PurgeInstanceHistoryForCondition")]
         public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.PurgeInstanceHistoryForCondition)]HttpRequest req,

@@ -11,8 +11,19 @@ using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
+    /// <summary>
+    /// Contains HTTP-triggered Azure Functions related to terminating individual
+    /// orchestration instances.
+    /// </summary>
     public class TerminateInstance
     {
+        /// <summary>
+        /// The Azure Function to rewind individual orchestration instances.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <param name="client">The durable orchestration client.</param>
+        /// <param name="instanceId">The ID of the orchestration instance being terminated.</param>
+        /// <returns>202 Accepted if the input is valid.</returns>
         [FunctionName("TerminateInstance")]
         public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.TerminateInstance)]HttpRequest req,

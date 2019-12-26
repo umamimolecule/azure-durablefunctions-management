@@ -11,8 +11,19 @@ using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
+    /// <summary>
+    /// Contains HTTP-triggered Azure Functions related to purging of history for
+    /// individual orchestration instances.
+    /// </summary>
     public class PurgeInstanceHistory
     {
+        /// <summary>
+        /// The Azure Function to purge the history for individual orchestration instances.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <param name="client">The durable orchestration client.</param>
+        /// <param name="instanceId">The ID of the orchestration instance being purged.</param>
+        /// <returns>A payload containing the number of instances purged.</returns>
         [FunctionName("PurgeInstanceHistory")]
         public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.PurgeInstanceHistory)]HttpRequest req,

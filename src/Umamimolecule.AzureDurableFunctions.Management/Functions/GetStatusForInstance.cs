@@ -11,8 +11,19 @@ using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
+    /// <summary>
+    /// Contains HTTP-triggered Azure Functions related to status for individual orchestration
+    /// instances.
+    /// </summary>
     public class GetStatusForInstance
     {
+        /// <summary>
+        /// The Azure Function to retrieve the status for individual orchestration instances.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <param name="client">The durable orchestration client.</param>
+        /// <param name="instanceId">The ID of the orchestration instance being queried.</param>
+        /// <returns>A payload containing the status for the orchestration instance.</returns>
         [FunctionName("GetStatusForInstance")]
         public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = Routes.GetStatusForInstance)]HttpRequest req,

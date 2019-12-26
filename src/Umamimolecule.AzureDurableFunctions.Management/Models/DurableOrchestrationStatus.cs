@@ -53,32 +53,32 @@ namespace Umamimolecule.AzureDurableFunctions.Management.Models
         public DateTime LastUpdatedTime { get; set; }
 
         /// <summary>
-        /// Gets the input of the orchestrator function instance.
+        /// Gets or sets the input of the orchestrator function instance.
         /// </summary>
         [JsonProperty("input")]
         public JToken Input { get; set; }
 
         /// <summary>
-        /// Gets the output of the queried orchestration instance.
+        /// Gets or sets the output of the queried orchestration instance.
         /// </summary>
         [JsonProperty("output")]
         public JToken Output { get; set; }
 
         /// <summary>
-        /// Gets the runtime status of the queried orchestration instance.
+        /// Gets or sets the runtime status of the queried orchestration instance.
         /// </summary>
         [JsonProperty("runtimeStatus")]
         [JsonConverter(typeof(StringEnumConverter))]
         public OrchestrationRuntimeStatus RuntimeStatus { get; set; }
 
         /// <summary>
-        /// Gets the custom status payload (if any) that was set by the orchestrator function.
+        /// Gets or sets the custom status payload (if any) that was set by the orchestrator function.
         /// </summary>
         [JsonProperty("customStatus")]
         public JToken CustomStatus { get; set; }
 
         /// <summary>
-        /// Gets the execution history of the orchestration instance.
+        /// Gets or sets the execution history of the orchestration instance.
         /// </summary>
         [JsonProperty("history")]
         public JArray History { get; set; }

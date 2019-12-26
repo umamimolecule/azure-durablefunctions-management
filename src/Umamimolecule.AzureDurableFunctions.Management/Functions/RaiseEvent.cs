@@ -13,8 +13,19 @@ using Umamimolecule.AzureDurableFunctions.Management.Utility;
 
 namespace Umamimolecule.AzureDurableFunctions.Management.Functions
 {
+    /// <summary>
+    /// Contains HTTP-triggered Azure Functions related to raising of events for
+    /// individual orchestration instances.
+    /// </summary>
     public class RaiseEvent
     {
+        /// <summary>
+        /// The Azure Function to raise events for individual orchestration instances.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <param name="client">The durable orchestration client.</param>
+        /// <param name="instanceId">The ID of the orchestration instance to raise the event for.</param>
+        /// <returns>202 Accepted if the input is valid.</returns>
         [FunctionName("RaiseEvent")]
         public virtual async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = Routes.RaiseEvent)]HttpRequest req,
