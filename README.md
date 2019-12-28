@@ -1,11 +1,16 @@
+# azure-durablefunctions-management
+
 ![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/umamimolecule/azure-durablefunctions-management/15/master) ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/umamimolecule/azure-durablefunctions-management/15) ![Nuget](https://img.shields.io/nuget/v/Umamimolecule.AzureDurableFunctions.Management)
 
-# azure-durablefunctions-management
 Automatically adds HTTP endpoints to your .Net Azure Durable Functions project to allow management of orchestration instances, such as querying status, terminating instances, rewind and more.
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/umamimolecule/azure-durablefunctions-management/master/assets/logo.png">
+</p>
 
 ### Table of contents
  - [NuGet Package](#nugetpackage)  
- - [Introduction](#introduction)  
+ - [Usage](#usage)  
  - [Documentation](#documentation)  
  - [Tutorial](#tutorial)  
 
@@ -16,9 +21,9 @@ Automatically adds HTTP endpoints to your .Net Azure Durable Functions project t
 
 https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
 
-<a name="introduction"/>
+<a name="usage"/>
 
-## Introduction
+## Usage
 
 This package provide an out-of-the-box set of management endpoints for your Durable Functions project.  You can query the status of orchestration instances, terminate instances, purge history, and more.
 
