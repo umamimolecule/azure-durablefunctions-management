@@ -25,7 +25,7 @@ https://www.nuget.org/packages/Umamimolecule.AzureDurableFunctions.Management/
 
 ## Usage
 
-This package provide an out-of-the-box set of management endpoints for your Durable Functions project.  You can query the status of orchestration instances, terminate instances, purge history, and more.
+This package provides an out-of-the-box set of management endpoints for your Durable Functions project.  You can query the status of orchestration instances, terminate instances, purge history, and more.
 
 To install, in Visual Studio select your Durable Functions project and run the following command in the Package Manager console:
 ```
