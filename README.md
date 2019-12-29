@@ -35,7 +35,7 @@ That's it - no additional coding is required in your project!  After you add thi
 
 ![Functions Console](docs/functionsconsole.png)
 
-The management endpoints are located at `/{routeRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
+The management endpoints are located at `/{baseRoute}/orchestration/instances` (this will be `/api/orchestration/instances` unless you have overridden the default route prefix).
 
 Access to all the management endpoints are controlled using function-level authentication (`AuthorizationLevel.Function`) which means you can lock down access to particular functions if you so choose.
 
